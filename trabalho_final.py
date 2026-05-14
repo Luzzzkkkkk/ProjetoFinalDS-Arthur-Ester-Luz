@@ -1,1 +1,2 @@
-def 
+def haha()
+    print("oi")
