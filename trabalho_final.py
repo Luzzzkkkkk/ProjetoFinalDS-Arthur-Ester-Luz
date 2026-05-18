@@ -9,22 +9,27 @@ def conectar():
         database="trabalhoadsfinal"
     )
 
-
 def cadastro():
     print("=-=-=-=-=-=-=-Cadastro-=-=-=-=-=-=-=-")
     print("1 - Estudante")
     print("2 - Professor")
+    print("0 - Sair")
+    
     while True:
         try:
             cargo = input("Digite seu cargo: ")
             if cargo == "1":
-                input('Digite seu nome: ')
-                input('Digite sua matrícula: ')
-                input('Coloque sua senha: ')
+                nome = input('Digite seu nome: ')
+                matrícula = int(input('Digite o número da matrícula: '))
+                senha = input('Coloque sua senha: ')
             elif cargo == "2":
-                input('Digite seu nome: ')
-                input('Digite seu ID: ')
+                nome = input('Digite seu nome: ')
+                id = int(input('Digite seu ID: '))
+                senha = input('Coloque sua senha: ')
             else: 
-                print('Erro, tente novamente!')
+                break
+        except ValueError:
+            print('Erro, tente novamente!')
 
 
+def validarDados
