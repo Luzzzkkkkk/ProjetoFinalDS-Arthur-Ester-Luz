@@ -8,19 +8,12 @@ def conectar():
         password="Senac2026",
         database="trabalhoadsfinal"
     )
-<<<<<<< HEAD
 
-=======
-             
->>>>>>> 9d9c6b18368e666e510e7969d253a0aa542208ff
 def cadastro():
     print("=-=-=-=-=-=-=-Cadastro-=-=-=-=-=-=-=-")
     print("1 - Estudante")
     print("2 - Professor")
-<<<<<<< HEAD
     print("0 - Sair")
-=======
->>>>>>> 9d9c6b18368e666e510e7969d253a0aa542208ff
     
     while True:
         try:
@@ -39,4 +32,5 @@ def cadastro():
             print('Erro, tente novamente!')
 
 
-def validarDados   
+def validarDados():
+    ...
