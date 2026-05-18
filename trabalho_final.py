@@ -8,12 +8,12 @@ def conectar():
         password="Senac2026",
         database="trabalhoadsfinal"
     )
-
-
+             
 def cadastro():
     print("=-=-=-=-=-=-=-Cadastro-=-=-=-=-=-=-=-")
     print("1 - Estudante")
     print("2 - Professor")
+    
     while True:
         try:
             cargo = input("Digite seu cargo: ")
