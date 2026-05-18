@@ -32,4 +32,4 @@ def cadastro():
             print('Erro, tente novamente!')
 
 
-def validarDados
+def validarDados   
