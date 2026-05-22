@@ -19,18 +19,22 @@ def cadastro():
         try:
             cargo = input("Digite seu cargo: ")
             if cargo == "1":
-                nome = input('Digite seu nome: ')
-                matrícula = int(input('Digite o número da matrícula: '))
-                senha = input('Coloque sua senha: ')
+                print("Bem-vindo à área do aluno!")
+                estudante()
             elif cargo == "2":
-                nome = input('Digite seu nome: ')
-                id = int(input('Digite seu ID: '))
-                senha = input('Coloque sua senha: ')
+                print("Bem-vindo à área do professor!")
             else: 
                 break
         except ValueError:
             print('Erro, tente novamente!')
+                
+def estudante():
+    
+    nome = input('Digite seu nome: ')
+    nome_correto = "".join ([c for c in nome if c.isalpha() or c.isspace()])
+    print(nome_correto)
+    matrícula = (input('Digite o número da matrícula: ')).isdigit()
+    senha = input('Coloque sua senha: ').replace(" ","")
 
 
-def validarDados():
-    ...
+cadastro()
