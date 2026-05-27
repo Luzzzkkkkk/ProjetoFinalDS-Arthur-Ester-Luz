@@ -1,5 +1,5 @@
 import mysql.connector
-
+import Time
 
 def conectar():
     return mysql.connector.connect(
@@ -9,8 +9,9 @@ def conectar():
         database="trabalhoadsfinal"
     )
 
-def cadastro():
-    print("=-=-=-=-=-=-=-Cadastro-=-=-=-=-=-=-=-")
+def login():
+    print("=-=-=-=-=-=-=-login-=-=-=-=-=-=-=-")
+    print("escolha uma das oipc")
     print("1 - Estudante")
     print("2 - Professor")
     print("0 - Sair")
@@ -48,4 +49,4 @@ def estudante():
 def prof():
     ...
 
-cadastro()
+login()
