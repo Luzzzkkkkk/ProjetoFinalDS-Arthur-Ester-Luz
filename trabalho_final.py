@@ -1,5 +1,5 @@
 import mysql.connector
-import Time
+import time
 
 def conectar():
     return mysql.connector.connect(
@@ -10,8 +10,14 @@ def conectar():
     )
 
 def login():
-    print("=-=-=-=-=-=-=-login-=-=-=-=-=-=-=-")
-    print("escolha uma das oipc")
+    print("Bem vindo ao nosso sistema")
+    time.sleep(1)
+    print("Direcionando a login...")
+    time.sleep(2) 
+    print("=-=-=-=-=-=-=-login-=-=-=-=-=-=-=")
+    time.sleep(2)
+    print("escolha uma das opçoes")
+    
     print("1 - Estudante")
     print("2 - Professor")
     print("0 - Sair")
@@ -20,9 +26,11 @@ def login():
         try:
             cargo = input("Digite seu cargo: ")
             if cargo == "1":
+                time.sleep(2)
                 print("Bem-vindo à área do aluno!")
                 estudante()
             elif cargo == "2":
+                time.sleep(2)
                 print("Bem-vindo à área do professor!")
                 prof()
             else: 
@@ -32,10 +40,11 @@ def login():
                 
 def estudante():
     nome = input('Digite seu nome: ')
+    
     if any(c.isdigit() for c in nome):
-        print("⚠️   Alerta: O nome contém números. O nome será corrigido.")
-    nome_correto = "".join ([c for c in nome if c.isalpha() or c.isspace()])
-    print(f"Correção do nome: { nome_correto }")
+        print("⚠️ Alerta: O nome contém números. O nome será corrigido. ")
+        nome_correto = "".join ([c for c in nome if c.isalpha() or c.isspace()])
+        print(f"Correção do nome: { nome_correto }")
     while True:
         matrícula = (input('Digite o número da matrícula: '))
         if any(c.isalpha() for c in matrícula):
