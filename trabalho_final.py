@@ -1,281 +1,274 @@
-<<<<<<< HEAD
-import _mysql_connector
-import json
- 
-# =====================================================================
-# CONFIGURAÇÃO E CRIAÇÃO DO BANCO DE DADOS (PERSISTÊNCIA & CRUD)
-# =====================================================================
-def inicializar_banco():
-    conexao = _mysql_connector.connect("escola.db")
-    cursor = conexao.cursor()
-    # Tabela de Alunos
-    cursor.execute("""
-    CREATE TABLE IF NOT EXISTS alunos (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        nome TEXT NOT NULL,
-        idade INTEGER NOT NULL,
-        turma TEXT NOT NULL,
-        senha TEXT NOT NULL,
-        notas TEXT DEFAULT '[]',
-        media REAL DEFAULT 0.0,
-        situacao TEXT DEFAULT 'Reprovado'
-    )
-    """)
-    # Tabela de Professores
-    cursor.execute("""
-    CREATE TABLE IF NOT EXISTS professores (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        nome TEXT NOT NULL,
-        idade INTEGER NOT NULL,
-        turma TEXT NOT NULL,
-        senha TEXT NOT NULL
-    )
-    """)
-    # Criar um Secretário Padrão (Admin) caso o banco esteja vazio
-    cursor.execute("SELECT COUNT(*) FROM professores")
-    if cursor.fetchone()[0] == 0:
-        # Cadastros iniciais de teste
-        cursor.execute("INSERT INTO professores (nome, idade, turma, senha) VALUES ('Admin Secretário', 40, 'ADMIN', '1234')")
-        cursor.execute("INSERT INTO professores (nome, idade, turma, senha) VALUES ('Professor Reginaldo', 35, '9A', 'prof123')")
-        cursor.execute("INSERT INTO alunos (nome, idade, turma, senha, notas, media, situacao) VALUES ('Lucas Silva', 15, '9A', 'aluno123', '[]', 0.0, 'Reprovado')")
-        conexao.commit()
-    conexao.close()
- 
-# =====================================================================
-# FUNÇÕES DE VALIDAÇÃO DE CAMPOS
-# =====================================================================
-def ler_inteiro(mensagem):
+import mysql.connector
+from mysql.connector import Error
+
+def conectar_bd():
+    try:
+        conexao = mysql.connector.connect(
+            host='127.0.0.1',
+            user='root',       
+            password='Senac2026',      
+            database='sistema_escolar'
+        )
+        return conexao
+    except Error as e:
+        print(f"Erro ao conectar ao MySQL: {e}")
+        return None
+
+def obter_texto_valido(mensagem):
+    while True:
+        entrada = input(mensagem).strip()
+        if entrada:
+            return entrada
+        print("Erro: Este campo não pode ficar vazio.")
+
+def obter_inteiro_valido(mensagem):
     while True:
         try:
-            valor = int(input(mensagem))
-            if valor < 0:
-                print(" Erro: O valor não pode ser negativo.")
-                continue
-            return valor
+            return int(input(mensagem))
         except ValueError:
-            print(" Erro: Digite um número inteiro válido.")
- 
-def ler_float(mensagem):
+            print("Erro: Digite um número inteiro válido.")
+
+def obter_nota_valida(mensagem):
     while True:
         try:
-            valor = float(input(mensagem))
-            if valor < 0.0 or valor > 10.0:
-                print(" Erro: A nota deve ser entre 0.0 e 10.0.")
-                continue
-            return valor
+            nota = float(input(mensagem))
+            if 0.0 <= nota <= 10.0:
+                return nota
+            print("Erro: A nota deve ser entre 0 e 10.")
         except ValueError:
-            print(" Erro: Digite um número decimal válido (use ponto).")
- 
-def ler_texto(mensagem):
-    while True:
-        valor = input(mensagem).strip()
-        if not valor:
-            print(" Erro: Este campo não pode ficar vazio.")
-            continue
-        return valor
- 
-# =====================================================================
-# REGRAS DE NEGÓCIO: CÁLCULOS E SITUAÇÃO
-# =====================================================================
-def calcular_situacao(notas_lista):
-    if not notas_lista:
+            print("Erro: Digite um número decimal válido.")
+
+def calcular_media_e_situacao(notas):
+    if not notas:
         return 0.0, "Reprovado"
-    media = sum(notas_lista) / len(notas_lista)
+    
+    soma = 0.0
+    for n in notas:
+        soma += n
+    media = round(soma / len(notas), 2)
+    
     if media >= 7.0:
         situacao = "Aprovado"
-    elif 5.0 <= media < 7.0:
+    elif media >= 5.0:
         situacao = "Recuperacao"
     else:
         situacao = "Reprovado"
-    return round(media, 2), situacao
- 
-# =====================================================================
-# FUNÇÕES DO SECRETÁRIO (CRUD TOTAL)
-# =====================================================================
-def menu_secretario():
+        
+    return media, situacao
+
+def atualizar_media_banco(conexao, matricula):
+    cursor = conexao.cursor()
+    cursor.execute("SELECT nota FROM notas_alunos WHERE matricula_FK = %s AND nota IS NOT NULL", (matricula,))
+    resultados = cursor.fetchall()
+    
+    notas = []
+    for r in resultados:
+        notas.append(float(r[0]))
+        
+    media, situacao = calcular_media_e_situacao(notas)
+    
+    cursor.execute("""
+        UPDATE notas_alunos 
+        SET media = %s, situacao = %s 
+        WHERE matricula_FK = %s
+    """, (media, situacao, matricula))
+    conexao.commit()
+
+def cadastrar_aluno(conexao):
+    print("\n--- CADASTRO DE ALUNO ---")
+    nome = obter_texto_valido("Nome do Aluno: ")
+    idade = obter_inteiro_valido("Idade: ")
+    turma = obter_texto_valido("Turma: ")
+    
+    cursor = conexao.cursor()
+    comando = "INSERT INTO alunos (nome, idade, turma) VALUES (%s, %s, %s)"
+    cursor.execute(comando, (nome, idade, turma))
+    conexao.commit()
+    
+    matricula = cursor.lastrowid
+    print(f"Aluno cadastrado com sucesso! Matrícula gerada: {matricula}")
+
+def listar_alunos(conexao):
+    print("\n--- LISTA DE ALUNOS ---")
+    cursor = conexao.cursor()
+    cursor.execute("SELECT matricula, nome, idade, turma FROM alunos")
+    alunos = cursor.fetchall()
+    
+    if not alunos:
+        print("Nenhum aluno cadastrado.")
+        return
+        
+    for aluno in alunos:
+        print(f"Matrícula: {aluno[0]} | Nome: {aluno[1]} | Idade: {aluno[2]} | Turma: {aluno[3]}")
+
+def editar_aluno(conexao):
+    print("\n--- EDITAR ALUNO ---")
+    matricula = obter_inteiro_valido("Digite a matrícula do aluno para editar: ")
+    
+    cursor = conexao.cursor()
+    cursor.execute("SELECT * FROM alunos WHERE matricula = %s", (matricula,))
+    if not cursor.fetchone():
+        print("Aluno não encontrado.")
+        return
+        
+    novo_nome = obter_texto_valido("Novo Nome: ")
+    nova_idade = obter_inteiro_valido("Nova Idade: ")
+    nova_turma = obter_texto_valido("Nova Turma: ")
+    
+    cursor.execute("""
+        UPDATE alunos SET nome = %s, idade = %s, turma = %s WHERE matricula = %s
+    """, (novo_nome, nova_idade, nova_turma, matricula))
+    conexao.commit()
+    print("Dados do aluno atualizados com sucesso!")
+
+def remover_aluno(conexao):
+    print("\n--- REMOVER ALUNO ---")
+    matricula = obter_inteiro_valido("Digite a matrícula do aluno para remover: ")
+    
+    cursor = conexao.cursor()
+    cursor.execute("DELETE FROM notas_alunos WHERE matricula_FK = %s", (matricula,))
+    cursor.execute("DELETE FROM alunos WHERE matricula = %s", (matricula,))
+    conexao.commit()
+    print("Aluno e suas respectivas notas foram removidos.")
+
+def buscar_aluno_por_nome(conexao):
+    print("\n--- BUSCAR ALUNO ---")
+    nome_busca = obter_texto_valido("Digite o nome ou parte do nome: ")
+    
+    cursor = conexao.cursor()
+    cursor.execute("SELECT matricula, nome, turma FROM alunos WHERE nome LIKE %s", (f"%{nome_busca}%",))
+    resultados = cursor.fetchall()
+    
+    if not resultados:
+        print("Nenhum aluno encontrado.")
+        return
+        
+    for r in resultados:
+        print(f"Matrícula: {r[0]} | Nome: {r[1]} | Turma: {r[2]}")
+
+def gerenciar_notas_turma(conexao):
+    print("\n--- LANÇAMENTO DE NOTAS POR TURMA ---")
+    turma = obter_texto_valido("Digite a turma que deseja buscar: ")
+    
+    cursor = conexao.cursor()
+    cursor.execute("SELECT matricula, nome FROM alunos WHERE turma = %s", (turma,))
+    alunos = cursor.fetchall()
+    
+    if not alunos:
+        print("Nenhum aluno encontrado nesta turma.")
+        return
+        
+    print(f"\nAlunos da Turma {turma}:")
+    for a in alunos:
+        print(f"ID/Matrícula: {a[0]} - Nome: {a[1]}")
+        
+    matricula = obter_inteiro_valido("\nDigite a matrícula do aluno para gerenciar as notas: ")
+
+    cursor.execute("SELECT nome FROM alunos WHERE matricula = %s AND turma = %s", (matricula, turma))
+    if not cursor.fetchone():
+        print("Erro: Matrícula não corresponde a um aluno desta turma.")
+        return
+
+    print("1 - Adicionar Nota\n2 - Remover Notas Existentes")
+    opcao = obter_inteiro_valido("Escolha uma opção: ")
+    
+    if opcao == 1:
+        nota = obter_nota_valida("Digite a nota (0.0 a 10.0): ")
+        cursor.execute("INSERT INTO notas_alunos (matricula_FK, nota) VALUES (%s, %s)", (matricula, nota))
+        conexao.commit()
+        atualizar_media_banco(conexao, matricula)
+        print("Nota registrada!")
+    elif opcao == 2:
+        cursor.execute("DELETE FROM notas_alunos WHERE matricula_FK = %s", (matricula,))
+        conexao.commit()
+        atualizar_media_banco(conexao, matricula)
+        print("Notas removidas e médias resetadas.")
+
+def painel_aluno(conexao):
+    print("\n--- PAINEL DO ALUNO ---")
+    matricula = obter_inteiro_valido("Digite sua matrícula para acessar suas notas: ")
+    
+    cursor = conexao.cursor()
+    cursor.execute("SELECT nome, turma FROM alunos WHERE matricula = %s", (matricula,))
+    aluno = cursor.fetchone()
+    
+    if not aluno:
+        print("Matrícula não cadastrada.")
+        return
+        
+    print(f"\nBem-vindo(a), {aluno[0]} | Turma: {aluno[1]}")
+    
+    cursor.execute("SELECT nota FROM notas_alunos WHERE matricula_FK = %s AND nota IS NOT NULL", (matricula,))
+    linhas_notas = cursor.fetchall()
+    
+    if not linhas_notas:
+        print("Nenhuma nota lançada para você ainda.")
+        return
+        
+    print("Suas Notas: ", end="")
+    notas_lista = []
+    for ln in linhas_notas:
+        notas_lista.append(str(ln[0]))
+    print(", ".join(notas_lista))
+    
+    cursor.execute("SELECT DISTINCT media, situacao FROM notas_alunos WHERE matricula_FK = %s", (matricula,))
+    resultado_final = cursor.fetchone()
+    
+    if resultado_final:
+        print(f"Sua Média Atual: {resultado_final[0]}")
+        print(f"Situação: {resultado_final[1]}")
+
+def menu():
+    conexao = conectar_bd()
+    if not conexao:
+        return
+
     while True:
-        print("\n--- MENU DO SECRETÁRIO ---")
-        print("1. Cadastrar Aluno")
-        print("2. Listar Alunos")
-        print("3. Editar Aluno")
-        print("4. Remover Aluno")
-        print("5. Cadastrar Professor")
-        print("6. Listar Professores")
-        print("7. Sair")
-        opcao = input("Escolha uma opção: ")
-        conexao = _mysql_connector.connect("escola.db")
-        cursor = conexao.cursor()
-        if opcao == "1":
-            print("\n[Cadastrar Aluno]")
-            nome = ler_texto("Nome do Aluno: ")
-            idade = ler_inteiro("Idade do Aluno: ")
-            turma = ler_texto("Turma (ex: 9A): ")
-            senha = ler_texto("Senha de Acesso: ")
-            cursor.execute("INSERT INTO alunos (nome, idade, turma, senha) VALUES (?, ?, ?, ?)", (nome, idade, turma, senha))
-            conexao.commit()
-            print(f" Aluno cadastrado com sucesso! ID de matrícula: {cursor.lastrowid}")
-        elif opcao == "2":
-            print("\n[Lista de Alunos]")
-            cursor.execute("SELECT id, nome, idade, turma, notas, media, situacao FROM alunos")
-            alunos = cursor.fetchall()
-            for alu in alunos:
-                print(f"ID: {alu[0]} | Nome: {alu[1]} | Turma: {alu[3]} | Notas: {alu[4]} | Média: {alu[5]} | Status: {alu[6]}")
-        elif opcao == "3":
-            print("\n[Editar Aluno]")
-            id_alu = ler_inteiro("Digite o ID do Aluno que deseja editar: ")
-            cursor.execute("SELECT id FROM alunos WHERE id = ?", (id_alu,))
-            if cursor.fetchone():
-                novo_nome = ler_texto("Novo Nome: ")
-                nova_idade = ler_inteiro("Nova Idade: ")
-                nova_turma = ler_texto("Nova Turma: ")
-                cursor.execute("UPDATE alunos SET nome = ?, idade = ?, turma = ? WHERE id = ?", (novo_nome, nova_idade, nova_turma, id_alu))
-                conexao.commit()
-                print(" Dados atualizados!")
-            else:
-                print(" Aluno não encontrado.")
-        elif opcao == "4":
-            print("\n[Remover Aluno]")
-            id_alu = ler_inteiro("Digite o ID do Aluno a remover: ")
-            cursor.execute("DELETE FROM alunos WHERE id = ?", (id_alu,))
-            conexao.commit()
-            print(" Aluno removido do sistema.")
-        elif opcao == "5":
-            print("\n[Cadastrar Professor]")
-            nome = ler_texto("Nome do Professor: ")
-            idade = ler_inteiro("Idade: ")
-            turma = ler_texto("Turma de Ensino (ex: 9A): ")
-            senha = ler_texto("Senha: ")
-            cursor.execute("INSERT INTO profesores (nome, idade, turma, senha) VALUES (?, ?, ?, ?)", (nome, idade, turma, senha))
-            conexao.commit()
-            print(f" Professor cadastrado! ID de acesso: {cursor.lastrowid}")
-        elif opcao == "6":
-            print("\n[Lista de Professores]")
-            cursor.execute("SELECT id, nome, turma FROM professores")
-            for prof in cursor.fetchall():
-                print(f"ID: {prof[0]} | Nome: {prof[1]} | Turma Alocada: {prof[2]}")
-        elif opcao == "7":
+        print("\n===============================")
+        print("    SISTEMA ESCOLAR PYTHON     ")
+        print("===============================")
+        print("1. Entrar como Secretário Escolar")
+        print("2. Entrar como Professor")
+        print("3. Entrar como Aluno")
+        print("0. Sair")
+        
+        opcao = obter_inteiro_valido("Escolha seu perfil: ")
+        
+        if opcao == 1:
+            while True:
+                print("\n--- MENU SECRETÁRIO ---")
+                print("1. Cadastrar Aluno")
+                print("2. Listar Alunos")
+                print("3. Editar Aluno")
+                print("4. Remover Aluno")
+                print("5. Buscar Aluno por Nome")
+                print("0. Voltar")
+                sub_opcao = obter_inteiro_valido("Opção: ")
+                if sub_opcao == 1: cadastrar_aluno(conexao)
+                elif sub_opcao == 2: listar_alunos(conexao)
+                elif sub_opcao == 3: editar_aluno(conexao)
+                elif sub_opcao == 4: remover_aluno(conexao)
+                elif sub_opcao == 5: buscar_aluno_por_nome(conexao)
+                elif sub_opcao == 0: break
+        
+        elif opcao == 2:
+            while True:
+                print("\n--- MENU PROFESSOR ---")
+                print("1. Pesquisar Sala e Lançar/Remover Notas")
+                print("0. Voltar")
+                sub_opcao = obter_inteiro_valido("Opção: ")
+                if sub_opcao == 1: gerenciar_notas_turma(conexao)
+                elif sub_opcao == 0: break
+                
+        elif opcao == 3:
+            painel_aluno(conexao)
+            
+        elif opcao == 0:
+            print("Encerrando o sistema...")
             conexao.close()
             break
         else:
-            print(" Opção Inválida.")
-        conexao.close()
- 
-# =====================================================================
-# FUNÇÕES DO PROFESSOR (Gerenciamento Acadêmico)
-# =====================================================================
-def menu_professor(prof_id, prof_turma):
-    while True:
-        print(f"\n--- PAINEL DO PROFESSOR (Turma: {prof_turma}) ---")
-        print("1. Listar/Buscar Alunos da Sala")
-        print("2. Lançar Nova Nota")
-        print("3. Limpar/Remover Notas de Aluno")
-        print("4. Sair")
-        opcao = input("Escolha uma opção: ")
-        conexao = _mysql_connector.connect("escola.db")
-        cursor = conexao.cursor()
-        if opcao == "1":
-            print(f"\n[Alunos da Turma {prof_turma}]")
-            cursor.execute("SELECT id, nome, notas, media, situacao FROM alunos WHERE turma = ?", (prof_turma,))
-            alunos = cursor.fetchall()
-            if not alunos:
-                print("Nenhum aluno matriculado nesta turma.")
-            for alu in alunos:
-                print(f"Matrícula: {alu[0]} | Aluno: {alu[1]} | Notas: {alu[2]} | Média: {alu[3]} | Situação: {alu[4]}")
-        elif opcao == "2":
-            print("\n[Lançar Nota]")
-            id_alu = ler_inteiro("Digite a matrícula do Aluno: ")
-            cursor.execute("SELECT notas, turma FROM alunos WHERE id = ?", (id_alu,))
-            resultado = cursor.fetchone()
-            if resultado:
-                notas_atuais = json.loads(resultado[0])
-                turma_alu = resultado[1]
-                if turma_alu != prof_turma and prof_turma != "ADMIN":
-                    print(" Você só pode lançar notas para alunos da sua própria turma.")
-                    continue
-                nova_nota = ler_float("Digite a nota a adicionar (0-10): ")
-                notas_atuais.append(nova_nota)
-                media, situacao = calcular_situacao(notas_atuais)
-                notas_json = json.dumps(notas_atuais)
-                cursor.execute("UPDATE alunos SET notas = ?, media = ?, situacao = ? WHERE id = ?", (notas_json, media, situacao, id_alu))
-                conexao.commit()
-                print(" Nota lançada e situação atualizada!")
-            else:
-                print("Aluno não encontrado.")
-        elif opcao == "3":
-            print("\n[Remover Notas]")
-            id_alu = ler_inteiro("Digite a matrícula do Aluno: ")
-            cursor.execute("SELECT turma FROM alunos WHERE id = ?", (id_alu,))
-            resultado = cursor.fetchone()
-            if resultado:
-                if resultado[0] != prof_turma and prof_turma != "ADMIN":
-                    print(" Permissão negada para esta turma.")
-                    continue
-                cursor.execute("UPDATE alunos SET notas = '[]', media = 0.0, situacao = 'Reprovado' WHERE id = ?", (id_alu,))
-                conexao.commit()
-                print(" Histórico de notas zerado para este aluno.")
-            else:
-                print(" Aluno não encontrado.")
+            print("Opção inválida.")
 
-=======
-import mysql.connector
-import time
-
-def conectar():
-    return mysql.connector.connect(
-        host="127.0.0.1",
-        user="root",
-        password="Senac2026",
-        database="trabalhoadsfinal"
-    )
-
-def login():
-    print("Bem vindo ao nosso sistema")
-    time.sleep(1)
-    print("Direcionando a login...")
-    time.sleep(2) 
-    print("=-=-=-=-=-=-=-login-=-=-=-=-=-=-=")
-    time.sleep(2)
-    print("escolha uma das opçoes")
-    
-    print("1 - Estudante")
-    print("2 - Professor")
-    print("0 - Sair")
-    
-    while True:
-        try:
-            cargo = input("Digite seu cargo: ")
-            if cargo == "1":
-                time.sleep(2)
-                print("Bem-vindo à área do aluno!")
-                estudante()
-            elif cargo == "2":
-                time.sleep(2)
-                print("Bem-vindo à área do professor!")
-                prof()
-            else: 
-                break
-        except ValueError:
-            print('Erro, tente novamente!')
-                
-def estudante():
-    nome = input('Digite seu nome: ')
-    
-    if any(c.isdigit() for c in nome):
-        print("⚠️ Alerta: O nome contém números. O nome será corrigido. ")
-        nome_correto = "".join ([c for c in nome if c.isalpha() or c.isspace()])
-        print(f"Correção do nome: { nome_correto }")
-    while True:
-        matrícula = (input('Digite o número da matrícula: '))
-        if any(c.isalpha() for c in matrícula):
-            print("Apenas números permitidos. Tente novamente.")
-        else:
-            print('Erro, tente novamente!')
-            break
-    
-        senha = input('Coloque sua senha: ').replace(" ","")
-
-def prof():
-    ...
-
-login()
->>>>>>> 1b3bb5c671fb265ea415fc99bd61870e645ff28e
+if __name__ == "__main__":
+    menu()
