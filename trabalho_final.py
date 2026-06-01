@@ -1,4 +1,3 @@
-
 import mysql.connector
 from mysql.connector import Error
 
@@ -28,33 +27,6 @@ def obter_inteiro_valido(mensagem):
             return int(input(mensagem))
         except ValueError:
             print("Erro: Digite um número inteiro válido.")
-             
-professor = []
-aluno = []
-secretário = []
-
-def cadastro():
-    print("=-=-=-=-=-=-=-Cadastro-=-=-=-=-=-=-=-")
-    print("1 - Estudante\n2 - Professor")
-
-    while True:
-        cargo = input("Digite seu cargo (1 ou 2): ")
-        
-        if cargo == "1":
-            nome = input('Nome: ')
-            matricula = input('Matrícula: ')
-            senha = input('Senha: ')
-            print("Estudante cadastrado!")
-            break
-            
-        elif cargo == "2":
-            nome = input('Nome: ')
-            id_prof = input('ID: ')
-            print("Professor cadastrado!")
-            break
-            
-        else: 
-            print('Opção inválida, tente novamente!')
 
 def cadastrar_professor(conexao):
     print("\n--- CADASTRO DE PROFESSOR ---")
@@ -109,7 +81,6 @@ def remover_professor(conexao):
     cursor.execute("DELETE FROM professores WHERE id = %s", (id_prof,))
     conexao.commit()
     print("Professor removido com sucesso.")
-comando = "INSERT INTO professores (nome, disciplina) VALUES (%s, %s)"
 
 def obter_nota_valida(mensagem):
     while True:
@@ -252,20 +223,28 @@ def gerenciar_notas_turma(conexao):
         print("Erro: Matrícula não corresponde a um aluno desta turma.")
         return
 
-    print("1 - Adicionar Nota\n2 - Remover Notas Existentes")
-    opcao = obter_inteiro_valido("Escolha uma opção: ")
-    
-    if opcao == 1:
-        nota = obter_nota_valida("Digite a nota (0.0 a 10.0): ")
-        cursor.execute("INSERT INTO notas_alunos (matricula_FK, nota) VALUES (%s, %s)", (matricula, nota))
-        conexao.commit()
-        atualizar_media_banco(conexao, matricula)
-        print("Nota registrada!")
-    elif opcao == 2:
-        cursor.execute("DELETE FROM notas_alunos WHERE matricula_FK = %s", (matricula,))
-        conexao.commit()
-        atualizar_media_banco(conexao, matricula)
-        print("Notas removidas e médias resetadas.")
+    print("1 - Adicionar Nota\n2 - Remover Notas Existentes\n0 - Voltar Menu")
+    while True:
+            opcao = obter_inteiro_valido("Escolha uma opção: ")
+            if opcao == 1:
+                nota = obter_nota_valida("Digite a nota (0.0 a 10.0): ")
+                cursor.execute("INSERT INTO notas_alunos (matricula_FK, nota) VALUES (%s, %s)", (matricula, nota))
+                conexao.commit()
+                atualizar_media_banco(conexao, matricula)
+                print("Nota registrada!")
+                continue
+            elif opcao == 2:
+                cursor.execute("DELETE FROM notas_alunos WHERE matricula_FK = %s", (matricula,))
+                conexao.commit()
+                atualizar_media_banco(conexao, matricula)
+                print("Notas removidas e médias resetadas.")
+            elif opcao == 0:
+                menu
+            else:
+                ValueError
+                print("Essa opção não é válida, tente novamente")
+            break
+
 
 def painel_aluno(conexao):
     print("\n--- PAINEL DO ALUNO ---")
@@ -317,22 +296,6 @@ def menu():
         
         opcao = obter_inteiro_valido("Escolha seu perfil: ")
         
-        # if opcao == 1:
-        #     while True:
-        #         print("\n--- MENU SECRETÁRIO ---")
-        #         print("1. Cadastrar Aluno")
-        #         print("2. Listar Alunos")
-        #         print("3. Editar Aluno")
-        #         print("4. Remover Aluno")
-        #         print("5. Buscar Aluno por Nome")
-        #         print("0. Voltar")
-        #         sub_opcao = obter_inteiro_valido("Opção: ")
-        #         if sub_opcao == 1: cadastrar_aluno(conexao)
-        #         elif sub_opcao == 2: listar_alunos(conexao)
-        #         elif sub_opcao == 3: editar_aluno(conexao)
-        #         elif sub_opcao == 4: remover_aluno(conexao)
-        #         elif sub_opcao == 5: buscar_aluno_por_nome(conexao)
-        #         elif sub_opcao == 0: break
         if opcao == 1:
             while True:
                 print("\n--- MENU SECRETÁRIO ---")
@@ -340,13 +303,16 @@ def menu():
                 print("2. Listar Alunos")
                 print("3. Editar Aluno")
                 print("4. Remover Aluno")
+
                 print("5. Buscar Aluno por Nome")
                 print("6. Cadastrar Professor")
                 print("7. Listar Professores")
                 print("8. Editar Professor")
                 print("9. Remover Professor")
                 print("0. Voltar")
+                
                 sub_opcao = obter_inteiro_valido("Opção: ")
+                
                 if sub_opcao == 1: cadastrar_aluno(conexao)
                 elif sub_opcao == 2: listar_alunos(conexao)
                 elif sub_opcao == 3: editar_aluno(conexao)
@@ -357,14 +323,15 @@ def menu():
                 elif sub_opcao == 8: editar_professor(conexao)
                 elif sub_opcao == 9: remover_professor(conexao)
                 elif sub_opcao == 0: break
-
-
+        
         elif opcao == 2:
             while True:
                 print("\n--- MENU PROFESSOR ---")
                 print("1. Pesquisar Sala e Lançar/Remover Notas")
                 print("0. Voltar")
+                
                 sub_opcao = obter_inteiro_valido("Opção: ")
+                
                 if sub_opcao == 1: gerenciar_notas_turma(conexao)
                 elif sub_opcao == 0: break
                 
@@ -376,6 +343,7 @@ def menu():
             conexao.close()
             break
         else:
+            ValueError
             print("Opção inválida.")
 
 if __name__ == "__main__":
