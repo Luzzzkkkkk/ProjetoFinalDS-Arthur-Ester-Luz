@@ -1,7 +1,8 @@
+
 import mysql.connector
 from mysql.connector import Error
 
-def conectar_bd():
+def conexão():
     try:
         conexao = mysql.connector.connect(
             host='127.0.0.1',
@@ -27,6 +28,88 @@ def obter_inteiro_valido(mensagem):
             return int(input(mensagem))
         except ValueError:
             print("Erro: Digite um número inteiro válido.")
+             
+professor = []
+aluno = []
+secretário = []
+
+def cadastro():
+    print("=-=-=-=-=-=-=-Cadastro-=-=-=-=-=-=-=-")
+    print("1 - Estudante\n2 - Professor")
+
+    while True:
+        cargo = input("Digite seu cargo (1 ou 2): ")
+        
+        if cargo == "1":
+            nome = input('Nome: ')
+            matricula = input('Matrícula: ')
+            senha = input('Senha: ')
+            print("Estudante cadastrado!")
+            break
+            
+        elif cargo == "2":
+            nome = input('Nome: ')
+            id_prof = input('ID: ')
+            print("Professor cadastrado!")
+            break
+            
+        else: 
+            print('Opção inválida, tente novamente!')
+
+def cadastrar_professor(conexao):
+    print("\n--- CADASTRO DE PROFESSOR ---")
+    nome = obter_texto_valido("Nome do Professor: ")
+    materia = obter_texto_valido("Matéria/Disciplina: ")
+    
+    cursor = conexao.cursor()
+    comando = "INSERT INTO professores (nome, materia) VALUES (%s, %s)"
+    cursor.execute(comando, (nome, materia))
+    conexao.commit()
+    
+    id_prof = cursor.lastrowid
+    print(f"Professor cadastrado com sucesso! ID gerado: {id_prof}")
+
+def listar_professores(conexao):
+    print("\n--- LISTA DE PROFESSORES ---")
+    cursor = conexao.cursor()
+    cursor.execute("SELECT id, nome, materia FROM professores")
+    professores = cursor.fetchall()
+    
+    if not professores:
+        print("Nenhum professor cadastrado.")
+        return
+        
+    for prof in professores:
+        print(f"ID: {prof[0]} | Nome: {prof[1]} | Matéria: {prof[2]}")
+
+def editar_professor(conexao):
+    print("\n--- EDITAR PROFESSOR ---")
+    id_prof = obter_inteiro_valido("Digite o ID do professor para editar: ")
+    
+    cursor = conexao.cursor()
+    cursor.execute("SELECT * FROM professores WHERE id = %s", (id_prof,))
+    if not cursor.fetchone():
+        print("Professor não encontrado.")
+        return
+        
+    novo_nome = obter_texto_valido("Novo Nome: ")
+    nova_materia = obter_texto_valido("Nova Matéria: ")
+    
+    cursor.execute("""
+        UPDATE professores SET nome = %s, materia = %s WHERE id = %s
+    """, (novo_nome, nova_materia, id_prof))
+    conexao.commit()
+    print("Dados do professor atualizados com sucesso!")
+
+def remover_professor(conexao):
+    print("\n--- REMOVER PROFESSOR ---")
+    id_prof = obter_inteiro_valido("Digite o ID do professor para remover: ")
+    
+    cursor = conexao.cursor()
+    cursor.execute("DELETE FROM professores WHERE id = %s", (id_prof,))
+    conexao.commit()
+    print("Professor removido com sucesso.")
+comando = "INSERT INTO professores (nome, disciplina) VALUES (%s, %s)"
 
 def obter_nota_valida(mensagem):
     while True:
@@ -219,7 +302,7 @@ def painel_aluno(conexao):
         print(f"Situação: {resultado_final[1]}")
 
 def menu():
-    conexao = conectar_bd()
+    conexao = conexão()
     if not conexao:
         return
 
@@ -234,6 +317,22 @@ def menu():
         
         opcao = obter_inteiro_valido("Escolha seu perfil: ")
         
+        # if opcao == 1:
+        #     while True:
+        #         print("\n--- MENU SECRETÁRIO ---")
+        #         print("1. Cadastrar Aluno")
+        #         print("2. Listar Alunos")
+        #         print("3. Editar Aluno")
+        #         print("4. Remover Aluno")
+        #         print("5. Buscar Aluno por Nome")
+        #         print("0. Voltar")
+        #         sub_opcao = obter_inteiro_valido("Opção: ")
+        #         if sub_opcao == 1: cadastrar_aluno(conexao)
+        #         elif sub_opcao == 2: listar_alunos(conexao)
+        #         elif sub_opcao == 3: editar_aluno(conexao)
+        #         elif sub_opcao == 4: remover_aluno(conexao)
+        #         elif sub_opcao == 5: buscar_aluno_por_nome(conexao)
+        #         elif sub_opcao == 0: break
         if opcao == 1:
             while True:
                 print("\n--- MENU SECRETÁRIO ---")
@@ -242,6 +341,10 @@ def menu():
                 print("3. Editar Aluno")
                 print("4. Remover Aluno")
                 print("5. Buscar Aluno por Nome")
+                print("6. Cadastrar Professor")
+                print("7. Listar Professores")
+                print("8. Editar Professor")
+                print("9. Remover Professor")
                 print("0. Voltar")
                 sub_opcao = obter_inteiro_valido("Opção: ")
                 if sub_opcao == 1: cadastrar_aluno(conexao)
@@ -249,8 +352,13 @@ def menu():
                 elif sub_opcao == 3: editar_aluno(conexao)
                 elif sub_opcao == 4: remover_aluno(conexao)
                 elif sub_opcao == 5: buscar_aluno_por_nome(conexao)
+                elif sub_opcao == 6: cadastrar_professor(conexao)
+                elif sub_opcao == 7: listar_professores(conexao)
+                elif sub_opcao == 8: editar_professor(conexao)
+                elif sub_opcao == 9: remover_professor(conexao)
                 elif sub_opcao == 0: break
-        
+
+
         elif opcao == 2:
             while True:
                 print("\n--- MENU PROFESSOR ---")
