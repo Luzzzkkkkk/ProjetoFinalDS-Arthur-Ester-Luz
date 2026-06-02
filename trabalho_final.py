@@ -281,6 +281,7 @@ def painel_aluno(conexao):
         print(f"Situação: {resultado_final[1]}")
 
 def menu():
+    from random import randint
     conexao = conexão()
     if not conexao:
         return
@@ -326,6 +327,11 @@ def menu():
         
         elif opcao == 2:
             while True:
+                print("\n --- PAINEL DO PROFESSOR ---")
+                id_prof = obter_inteiro_valido ("Digite seu id:")
+                
+
+                
                 print("\n--- MENU PROFESSOR ---")
                 print("1. Pesquisar Sala e Lançar/Remover Notas")
                 print("0. Voltar")
