@@ -28,10 +28,23 @@ def obter_inteiro_valido(mensagem):
         except ValueError:
             print("Erro: Digite um número inteiro válido.")
 
-def adm():
-    print("\n --- PAINEL DO ADMINISTRADOR ---")
-    nome = obter_texto_valido("Digite seu nome:")
+admin = []
+id_admin = 1
+senha = 158419
+def cadastrar_admin():
+    global id_admin
     
+    print("\n --- PAINEL DO ADMINISTRADOR ---")
+nome = obter_texto_valido("Digite seu nome:")
+senha = obter_inteiro_valido("Digite sua senha: ")
+adm = {
+    "Id": id_admin,
+    "Usuário": nome,
+    "Senha": senha
+    }
+admin.append(adm)
+print(f"\n Administrador cadastrado com sucesso! Seu id é: {id_admin}")
+
 def cadastrar_professor(conexao):
     print("\n--- CADASTRO DE PROFESSOR ---")
     nome = obter_texto_valido("Nome do Professor: ")
@@ -292,21 +305,57 @@ def menu():
         print("\n===============================")
         print("    SISTEMA ESCOLAR PYTHON     ")
         print("===============================")
-        print("1. Entrar como Secretário Escolar")
-        print("2. Entrar como Professor")
-        print("3. Entrar como Aluno")
+        print("1. Entrar como Administrador")
+        print("2. Entrar como Secretário Escolar")
+        print("3. Entrar como Professor")
+        print("4. Entrar como Aluno")
         print("0. Sair")
         
         opcao = obter_inteiro_valido("Escolha seu perfil: ")
-        
         if opcao == 1:
             while True:
-                print("\n--- MENU SECRETÁRIO ---")
+                print("\n - ALUNOS - ")
                 print("1. Cadastrar Aluno")
                 print("2. Listar Alunos")
                 print("3. Editar Aluno")
                 print("4. Remover Aluno")
 
+                print("\n - PROFESSORES - ")
+                print("5. Buscar Aluno por Nome")
+                print("6. Cadastrar Professor")
+                print("7. Listar Professores")
+                print("8. Editar Professor")
+                print("9. Remover Professor")
+
+                print("\n - SECRETÁRIO ESCOLAR - ")
+                print("10. Cadastrar Secretário Escolar")
+                print("11. Editar Secretário Escolar")
+                print("12. Remover Secretário Escolar")
+                print("0. Voltar")
+                
+                sub_opcao = obter_inteiro_valido("Opção: ")
+                
+                if sub_opcao == 1: cadastrar_aluno(conexao)
+                elif sub_opcao == 2: listar_alunos(conexao)
+                elif sub_opcao == 3: editar_aluno(conexao)
+                elif sub_opcao == 4: remover_aluno(conexao)
+                elif sub_opcao == 5: buscar_aluno_por_nome(conexao)
+                elif sub_opcao == 6: cadastrar_professor(conexao)
+                elif sub_opcao == 7: listar_professores(conexao)
+                elif sub_opcao == 8: editar_professor(conexao)
+                elif sub_opcao == 9: remover_professor(conexao)
+                elif sub_opcao == 0: break
+        elif opcao == 2:
+            while True:
+                print("\n--- MENU SECRETÁRIO ---")
+
+                print("\n - ALUNOS - ")
+                print("1. Cadastrar Aluno")
+                print("2. Listar Alunos")
+                print("3. Editar Aluno")
+                print("4. Remover Aluno")
+
+                print("\n - PROFESSORES - ")
                 print("5. Buscar Aluno por Nome")
                 print("6. Cadastrar Professor")
                 print("7. Listar Professores")
@@ -327,12 +376,8 @@ def menu():
                 elif sub_opcao == 9: remover_professor(conexao)
                 elif sub_opcao == 0: break
         
-        elif opcao == 2:
+        elif opcao == 3:
             while True:
-                print("\n --- PAINEL DO PROFESSOR ---")
-                
-
-                
                 print("\n--- MENU PROFESSOR ---")
                 print("1. Pesquisar Sala e Lançar/Remover Notas")
                 print("0. Voltar")
@@ -342,7 +387,7 @@ def menu():
                 if sub_opcao == 1: gerenciar_notas_turma(conexao)
                 elif sub_opcao == 0: break
                 
-        elif opcao == 3:
+        elif opcao == 4:
             painel_aluno(conexao)
             
         elif opcao == 0:
