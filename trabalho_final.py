@@ -7,7 +7,7 @@ def conexão():
             host='127.0.0.1',
             user='root',       
             password='Senac2026',      
-            database='sistema_escolar'
+            database='sistema_de_escolar'
         )
         return conexao
     except Error as e:
@@ -28,6 +28,10 @@ def obter_inteiro_valido(mensagem):
         except ValueError:
             print("Erro: Digite um número inteiro válido.")
 
+def adm():
+    print("\n --- PAINEL DO ADMINISTRADOR ---")
+    nome = obter_texto_valido("Digite seu nome:")
+    
 def cadastrar_professor(conexao):
     print("\n--- CADASTRO DE PROFESSOR ---")
     nome = obter_texto_valido("Nome do Professor: ")
@@ -281,11 +285,9 @@ def painel_aluno(conexao):
         print(f"Situação: {resultado_final[1]}")
 
 def menu():
-    from random import randint
     conexao = conexão()
     if not conexao:
         return
-
     while True:
         print("\n===============================")
         print("    SISTEMA ESCOLAR PYTHON     ")
@@ -328,7 +330,6 @@ def menu():
         elif opcao == 2:
             while True:
                 print("\n --- PAINEL DO PROFESSOR ---")
-                id_prof = obter_inteiro_valido ("Digite seu id:")
                 
 
                 
