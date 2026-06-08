@@ -9,14 +9,34 @@
 <body>
     <header>
         <h1>Gasther Colluz</h1>
-        
+        <h5>@Gasther Colluz</h5>
+        <h2 id="horario">Carregando</h2>
     </header>
     <main></main>
     <footer>
-      <h6>@Gasther Colluz</h6>  <h6>© 2026 </h6>
+       <h6>© 2026 </h6>
     </footer>
     
     <script>
+       // 1. Pega a hora atual exata do dispositivo de quem abriu o site (0 a 23)
+        const hora = new Date().getHours();
+        
+        // 2. Cria o espaço para guardar o texto que será exibido
+        let textoSaudacao = "";
+
+        // 3. Verifica o horário para decidir a frase certa:
+        if (hora >= 5 && hora < 12) {
+            textoSaudacao = "Bom dia!";   // Se for entre 5h e 11h59
+        } else if (hora >= 12 && hora < 18) {
+            textoSaudacao = "Boa tarde!"; // Se for entre 12h e 17h59
+        } else {
+            textoSaudacao = "Boa noite!"; // Se for entre 18h e 4h59
+        }
+
+        // 4. Substitui o "Carregando..." pela saudação correta na tela
+        document.getElementById("saudacao").innerText = textoSaudacao;
+        
+    
 
     </script>
 </body>
