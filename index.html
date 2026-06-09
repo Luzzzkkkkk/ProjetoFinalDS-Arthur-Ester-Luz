@@ -19,14 +19,30 @@
 <body>
     <header>
         <h1>Gasther Colluz</h1>
-        
+        <h5>@Gasther Colluz</h5>
+        <h2 id="horario">Carregando</h2>
     </header>
     <main></main>
     <footer>
-      <h6>@Gasther Colluz</h6>  <h6>© 2026 </h6>
+       <h6>© 2026 </h6>
     </footer>
     
     <script>
+       
+        const hora = new Date().getHours();
+        let textohorario = "";
+       
+        if (hora >= 5 && hora < 12) {
+            textohorario= "Bom dia!";   
+        } else if (hora >= 12 && hora < 18) {
+            textohorario = "Boa tarde!"; 
+        } else {
+            textohorario = "Boa noite!"; 
+        }
+
+        document.getElementById("horario").innerText = textohorario;
+        
+    
 
     </script>
 </body>
