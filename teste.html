@@ -4,7 +4,7 @@
     <title>Colégio Gasther Colluz</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="interfacelinda.css">
+    <link rel="stylesheet" href="sonicface.css">
 </head>
 <body>
     <header>
@@ -26,6 +26,12 @@
         <section id="inicio" class="conteudo-pagina active">
             <h2>Bem-vindo ao Portal Escolar</h2>
             <p>Selecione uma das abas acima para acessar a sua área de login correspondente.</p>
+            <div class="banner">
+  <!-- O JavaScript vai mudar o texto que aparece aqui dentro -->
+  <h1 id="frase-rotativa" class="fade">Educação que transforma o presente e constrói o futuro.</h1>
+</div>
+
+  
         </section>
 
         <!-- TELA DE LOGIN DO ALUNO -->
@@ -94,6 +100,39 @@
             // 4. Mostra a página correspondente ao clique
             document.getElementById(idPagina).classList.add('active');
         }
+        // 1. Lista de frases que vão aparecer no site
+const frases = [
+  "Educação que transforma o presente e constrói o futuro.",
+  "Mais que uma escola, um lugar para crescer e ser feliz.",
+  "Formando mentes brilhantes e cidadãos conscientes.",
+  "Matrículas abertas: venha fazer parte da nossa história!"
+];
+
+// 2. Seleciona o elemento h1 do HTML
+const elementoTexto = document.getElementById("frase-rotativa");
+
+let indiceAtual = 0;
+
+function mudarFrase() {
+  // Adiciona a classe que faz a frase atual sumir (fade-out)
+  elementoTexto.classList.add("escondido");
+
+  // Aguarda 800ms (tempo do fade-out) para trocar o texto e reexibir
+  setTimeout(() => {
+    // Avança para a próxima frase da lista
+    indiceAtual = (indiceAtual + 1) % frases.length;
+    
+    // Troca o texto interno do h1
+    elementoTexto.textContent = frases[indiceAtual];
+    
+    // Remove a classe para a nova frase aparecer (fade-in)
+    elementoTexto.classList.remove("escondido");
+  }, 800); 
+}
+
+// 3. Executa a função a cada 4000 milissegundos (4 segundos)
+setInterval(mudarFrase, 4000);
+
      </script>
 </body>
 </html>

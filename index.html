@@ -9,15 +9,26 @@
 <body>
     <header>
         <h1>Gasther Colluz</h1>
-        <h5>@Gasther Colluz</h5>
-        <h2 id="horario">Carregando</h2>
+         <h2 id="horario">Carregando</h2>
+          <nav class="abas">
+            <button class="aba active" onclick="navegarpara('inicio')">Inicio</button>
+             <button class="aba" onclick="navegarpara('aluno')">Sou Aluno</button>
+              <button class="aba" onclick="navegarpara('professor')">Sou Professor</button>
+               <button class="aba" onclick="navegarpara('secretario')">Secretario</button>
+                <button class="aba" onclick="navegarpara('sobre')">Sobre</button>
+          </nav>
     </header>
     <main>
-        
+        <section id="inicio" class="conteudo-pagina active">
+         <h2>Bem vindo</h2>
+         <p></p>
+         <h4 id="frase"> </h4>
+        </section>
     </main>
     
     <footer>
-       <h6>© 2026 </h6>
+        <h5>@Gasther Colluz</h5>
+        <h6>© 2026 </h6>
     </footer>
     
     <script>
