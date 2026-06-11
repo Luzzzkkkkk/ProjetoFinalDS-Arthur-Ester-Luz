@@ -26,17 +26,15 @@
          <p></p>
          <h4 id="frase"> </h4>
         </section>
-        <section id="sobre">
-            <h2>>🏫O Início de um Sonho (1985)</h2>
-            <p>No dia 25 de outubro de 1985, nascia uma instituição com a missão de transformar vidas através do conhecimento. Fundada por três educadores apaixonados pela pedagogia, a escola começou suas atividades em um ambiente simples, mas com o objetivo gigante de oferecer um ensino humanizado, crítico e de alta qualidade.
-</p> 
+          <section id="sobre" class="conteudo-pagina">
+            <h2>🏫O Início de um Sonho (1985)</h2>
+            <p>No dia 25 de outubro de 1985, nascia uma instituição com a missão de transformar vidas através do conhecimento. Fundada por três educadores apaixonados pela pedagogia, a escola começou suas atividades em um ambiente simples, mas com o objetivo gigante de oferecer um ensino humanizado, crítico e de alta qualidade.</p> 
             <h2> Crescimento e Modernização</h2>
             <p>Ao longo das décadas de 1990 e 2000, a instituição acompanhou as transformações do mundo. A escola expandiu sua estrutura física, inaugurou laboratórios modernos e passou a atender desde a Educação Infantil até o Ensino Médio. O foco sempre foi alinhar a inovação tecnológica aos valores éticos e sociais.</p>
             <h2>A Instituição Hoje</h2>
             <p>Atualmente, somos referência em excelência acadêmica e formação integral. Preparamos nossos alunos não apenas para os exames e vestibulares mais concorridos, mas também para os desafios globais do século XXI, cultivando a liderança, a empatia e o pensamento do futuro.</p>
             <h2>A Origem do Nosso Nome</h2>
-            <p>Muitos se perguntam o significado por trás da nossa marca. A identidade da escola é o reflexo direto da união, do esforço e do coração dos nossos três fundadores. O nome Gasther Colluz nasceu da junção harmoniosa dos nomes de Giovanna Luz, Arthur Castillo e Ester Correa. Essa combinação simboliza a soma de seus ideais e o legado vivo que eles decidiram construir juntos para a educação.</p>
-</h2>
+            <p>Muitos se perguntam o significado por trás da nossa marca. A identidade da escola é o reflexo direto da união, do esforço e do coração dos nossos três fundadores. O nome Gasther Colluz nasceu da junção harmoniosa dos nomes de Giovanna Luz, Arthur Castillo e Ester Correa. Essa combinação simboliza a soma de seus ideais e o legado vivo que eles decidiram construir juntos para a educação.</p></h2>
         </section>
     </main>
     
@@ -46,18 +44,36 @@
     </footer>
     
     <script>
-       
-        const hora = new Date().getHours();
-        let textohorario = "";
-       
-        if (hora >= 5 && hora < 12) {
-            textohorario= "BOM DIA 😊☀️";   
-        } else if (hora >= 12 && hora < 18) {
-            textohorario = "BOA TARDE 😁🌆"; 
-        } else {
-            textohorario = "BOA NOITE 😉🌃"; 
-        }
+    const hora = new Date().getHours();
+let textohorario = "";
 
-        document.getElementById("horario").innerText = textohorario;
+if (hora >= 5 && hora < 12) {
+    textohorario = "BOM DIA 😊☀️";   
+} else if (hora >= 12 && hora < 18) {
+    textohorario = "BOA TARDE 😁🌆"; 
+} else {
+    textohorario = "BOA NOITE 😉🌃"; 
+}
+
+// Adicionado o parâmetro 'event' aqui para garantir o funcionamento do currentTarget
+function navegarPara(idPagina, event) {
+    // 1. Remove o active de todos os botões das abas
+    const abas = document.querySelectorAll('.aba');
+    abas.forEach(aba => aba.classList.remove('active'));
+       
+    // 2. Remove o active de todas as seções de conteúdo
+    const paginas = document.querySelectorAll('.conteudo-pagina');
+    paginas.forEach(pagina => pagina.classList.remove('active'));
+
+    // 3. Adiciona active no botão que você clicou
+    event.currentTarget.classList.add('active');
+   
+    // 4. Mostra a página correta
+    document.getElementById(idPagina).classList.add('active');
+}
+
+// Define o texto do horário na tela (apenas uma vez)
+document.getElementById("horario").innerText = textohorario;
+
      </script>
 </body>
