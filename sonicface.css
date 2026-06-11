@@ -14,7 +14,7 @@ body {
 }
  
 header {
-    font-weight: 800;
+    font-weight: 400;
     padding: 2rem;
     background-color: #FFFFFF;
     text-align: center;
@@ -22,7 +22,8 @@ header {
 
 h1 {
   font-family: "Montserrat Alternates", sans-serif;
-
+  margin-bottom: 10px;
+  font-size: 40px;
 }
  
 main {
@@ -40,16 +41,29 @@ section {
   gap: 1rem;
 }
  
-h2 {
-  color: #000000;
-  font-size: 1.2rem
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 10px;
+  padding: 0;
+  color:#122C4F;
 }
 
 
-button[onclick="navegarpara('inicio')"], [onclick="navegarpara('aluno')"], [onclick="navegarpara('professor')"], [onclick="navegarpara('secretario')]"] {
-  gap: 1.5rem;
+.abas {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 10px;
   
 }
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+   
   
 input[type="text"], input[type="password"]{
   width: 100%;
@@ -85,8 +99,23 @@ button {
 }
 
 
-button:hover {
+.aba.active:hover {
   background-color: #5B88B2;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu{
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+}
+
+.dropdown:hover .dropdown-menu{
+  display: block;
 }
  
 select {
@@ -94,8 +123,15 @@ select {
   background-color: #122C4F
 }
 
-footer { 
-    padding: 0;
-    color:#122C4F;
+.conteudo-pagina{
+  display: none;
 }
- 
+.conteudo-pagina.active{
+  display: block;
+}
+
+.aba.active {
+  background-color: #435a70;
+  color: white;
+  font-weight: bold;
+}
