@@ -38,7 +38,14 @@ main {
 section {
   display: flex;
   flex-direction: colunm;
-  gap: 1rem;
+  gap:2rem;
+  padding: 0;
+
+}
+
+p{
+  padding: 0%;
+  width: 100%;
 }
  
 footer {
@@ -91,7 +98,7 @@ button {
   color: #FFFFFF;
   border-radius: 10px;
   font-family: "Montserrat Alternates", sans-serif;
-  font-size: 200;
+  font-size: 1.0rem;
   padding: 0.5rem;
   outline: none;
   box-shadow: 0 10px 25px rgb(0,0,0,0.1);
