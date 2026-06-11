@@ -14,9 +14,10 @@ body {
 }
  
 header {
-  padding: 2rem;
-  background-color: #FFFFFF;
-  text-align: center;
+    font-weight: 200;
+    padding: 2rem;
+    background-color: #FFFFFF;
+    text-align: center;
 }
  
 main {
@@ -70,5 +71,9 @@ button:hover {
 select {
   cursor: pointer;
   background-color: #122C4F
+}
+
+footer { 
+    color:#122C4F;
 }
  
