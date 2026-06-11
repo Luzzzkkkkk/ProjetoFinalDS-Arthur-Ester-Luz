@@ -7,17 +7,22 @@
 }
  
 body {
-  background-color: #5B88B2;
+  background-color: #426688;
   color: #000000;
   font-family: "Montserrat Alternates", sans-serif;
   font-weight: 400;
 }
  
 header {
-    font-weight: 200;
+    font-weight: 800;
     padding: 2rem;
     background-color: #FFFFFF;
     text-align: center;
+}
+
+h1 {
+  font-family: "Montserrat Alternates", sans-serif;
+
 }
  
 main {
@@ -39,7 +44,13 @@ h2 {
   color: #000000;
   font-size: 1.2rem
 }
- 
+
+
+button[onclick="navegarpara('inicio')"], [onclick="navegarpara('aluno')"], [onclick="navegarpara('professor')"], [onclick="navegarpara('secretario')]"] {
+  gap: 1.5rem;
+  
+}
+  
 input[type="text"], input[type="password"]{
   width: 100%;
   padding:0.5rem;
@@ -56,14 +67,24 @@ input[type="text"], input[type="password"]{
   padding: 2rem;
   border-radius: 10px;
   outline: none;
-  box-shadow: 0 10px 25px rgb(0,0,0,0.1)
+  box-shadow: 0 10px 25px rgb(0,0,0,0.9);
+  gap: 1rem;
+
 }
  
 button {
   background-color: #122C4F;
   color: #FFFFFF;
+  border-radius: 10px;
+  font-family: "Montserrat Alternates", sans-serif;
+  font-size: 200;
+  padding: 0.5rem;
+  outline: none;
+  box-shadow: 0 10px 25px rgb(0,0,0,0.1);
+  
 }
- 
+
+
 button:hover {
   background-color: #5B88B2;
 }
