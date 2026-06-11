@@ -74,6 +74,7 @@ select {
 }
 
 footer { 
+    padding: 0;
     color:#122C4F;
 }
  
