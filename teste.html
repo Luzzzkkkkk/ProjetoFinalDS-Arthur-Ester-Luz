@@ -1,20 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>Colégio Gasther Colluz</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="interfacelinda.css">
+</head>
+<body>
+    <header>
+        <h1>Gasther Colluz</h1>
+        <h5>@Gasther Colluz</h5>
+        <h2 id="horario">Carregando</h2>
+
+        <!-- ABAS DE NAVEGAÇÃO LOGO ABAIXO DO CABEÇALHO -->
+        <nav class="abas-navegacao">
+            <button class="aba-item active" onclick="navegarPara('inicio')">Início</button>
+            <button class="aba-item" onclick="navegarPara('aluno')">Sou Aluno</button>
+            <button class="aba-item" onclick="navegarPara('professor')">Sou Professor</button>
+            <button class="aba-item" onclick="navegarPara('admin')">Sou Admin</button>
+        </nav>
+    </header>
+
     <main>
-        <h2>Área do Aluno</h2>
-        
-        <form>
-            <!-- Campo Nome -->
-            <label for="nome">Nome Completo:</label><br>
-            <input type="text" id="nome" name="nome" placeholder="Digite seu nome"><br><br>
+        <!-- CONTEÚDO DA PÁGINA INICIAL -->
+        <section id="inicio" class="conteudo-pagina active">
+            <h2>Bem-vindo ao Portal Escolar</h2>
+            <p>Selecione uma das abas acima para acessar a sua área de login correspondente.</p>
+        </section>
 
-            <!-- Campo Matrícula -->
-            <label for="matricula">Matrícula:</label><br>
-            <input type="number" id="matricula" name="matricula" placeholder="Digite sua matrícula"><br><br>
+        <!-- TELA DE LOGIN DO ALUNO -->
+        <section id="aluno" class="conteudo-pagina">
+            <h2>Acesso do Aluno 🎓</h2>
+            <form>
+                <input type="text" placeholder="Matrícula do Aluno">
+                <input type="password" placeholder="Senha">
+                <button type="submit">Entrar no Portal</button>
+            </form>
+        </section>
 
-            <!-- Campo Senha -->
-            <label for="senha">Senha:</label><br>
-            <input type="password" id="senha" name="senha" placeholder="Digite sua senha"><br><br>
+        <!-- TELA DE LOGIN DO PROFESSOR -->
+        <section id="professor" class="conteudo-pagina">
+            <h2>Acesso do Professor 👨‍🏫</h2>
+            <form>
+                <input type="email" placeholder="E-mail Institucional">
+                <input type="password" placeholder="Senha">
+                <button type="submit">Entrar no Sistema</button>
+            </form>
+        </section>
 
-            <!-- Botão de Enviar -->
-            <button type="submit">Entrar</button>
-        </form>
+        <!-- TELA DE LOGIN DO ADMIN -->
+        <section id="admin" class="conteudo-pagina">
+            <h2>Painel do Administrador ⚙️</h2>
+            <form>
+                <input type="text" placeholder="Identificação Admin">
+                <input type="password" placeholder="Chave de Segurança">
+                <button type="submit">Acessar Painel</button>
+            </form>
+        </section>
     </main>
+
+    <footer>
+       <h6>© 2026 </h6>
+    </footer>
+    
+    <script>
+        // Seu código original de saudação por horário
+        const hora = new Date().getHours();
+        let textohorario = "";
+       
+        if (hora >= 5 && hora < 12) {
+            textohorario= "BOM DIA 😊☀️";   
+        } else if (hora >= 12 && hora < 18) {
+            textohorario = "BOA TARDE 😁🌆"; 
+        } else {
+            textohorario = "BOA NOITE 😉🌃"; 
+        }
+
+        document.getElementById("horario").innerText = textohorario;
+
+        // FUNÇÃO PARA MUDAR DE PÁGINA INSTANTANEAMENTE
+        function navegarPara(idPagina) {
+            // 1. Remove o destaque visual de todas as abas
+            const abas = document.querySelectorAll('.aba-item');
+            abas.forEach(aba => aba.classList.remove('active'));
+
+            // 2. Esconde todas as seções de conteúdo
+            const paginas = document.querySelectorAll('.conteudo-pagina');
+            paginas.forEach(pagina => pagina.classList.remove('active'));
+
+            // 3. Adiciona destaque na aba que foi clicada
+            event.currentTarget.classList.add('active');
+
+            // 4. Mostra a página correspondente ao clique
+            document.getElementById(idPagina).classList.add('active');
+        }
+     </script>
+</body>
+</html>

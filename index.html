@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="sonicface.css">
+
 </head>
 <body>
     <header>
@@ -12,7 +13,10 @@
         <h5>@Gasther Colluz</h5>
         <h2 id="horario">Carregando</h2>
     </header>
-    <main></main>
+    <main>
+        
+    </main>
+    
     <footer>
        <h6>© 2026 </h6>
     </footer>
@@ -23,16 +27,13 @@
         let textohorario = "";
        
         if (hora >= 5 && hora < 12) {
-            textohorario= "Bom dia!";   
+            textohorario= "BOM DIA 😊☀️";   
         } else if (hora >= 12 && hora < 18) {
-            textohorario = "Boa tarde!"; 
+            textohorario = "BOA TARDE 😁🌆"; 
         } else {
-            textohorario = "Boa noite!"; 
+            textohorario = "BOA NOITE 😉🌃"; 
         }
 
         document.getElementById("horario").innerText = textohorario;
-        
-    
-
-    </script>
+     </script>
 </body>
