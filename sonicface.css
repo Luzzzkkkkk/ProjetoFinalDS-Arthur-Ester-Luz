@@ -15,7 +15,7 @@ body {
  
 header {
     font-weight: 400;
-    padding: 2rem;
+    padding: 1rem;
     background-color: #FFFFFF;
     text-align: center;
 }
@@ -55,7 +55,7 @@ footer {
   justify-content: center;
   gap: 15px;
   margin-top: 10px;
-  
+  padding: 10px
 }
 
 .menu {
@@ -118,7 +118,7 @@ button {
   display: block;
 }
  
-select {
+.aba.active:hover {
   cursor: pointer;
   background-color: #122C4F
 }
