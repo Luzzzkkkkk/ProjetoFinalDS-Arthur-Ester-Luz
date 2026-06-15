@@ -81,15 +81,20 @@ input[type="text"], input[type="password"]{
   background-color: #FFFFFF;
 }
  
+
+.card{
+  display: flex;
+  flex-direction: colunm;
+  gap:1rem
+}
 .card {
   background-color: #FFFFFF;
   width: 100%;
-  width: 400px;
+  max-width: 400px;
   padding: 2rem;
   border-radius: 10px;
   outline: none;
   box-shadow: 0 10px 25px rgb(0,0,0,0.9);
-  gap: 1rem;
 
 }
  
@@ -110,20 +115,6 @@ button {
   background-color: #5B88B2;
 }
 
-.dropdown {
-  position: relative;
-}
-
-.dropdown-menu{
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-}
-
-.dropdown:hover .dropdown-menu{
-  display: block;
-}
  
 .aba.active:hover {
   cursor: pointer;
@@ -141,4 +132,10 @@ button {
   background-color: #435a70;
   color: white;
   font-weight: bold;
+}
+
+.email{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
