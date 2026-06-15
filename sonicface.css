@@ -12,6 +12,17 @@ body {
   font-family: "Montserrat Alternates", sans-serif;
   font-weight: 400;
 }
+
+body{
+  margin: 0;
+  min-height: 100vh; 
+  background: linear-gradient(
+    135deg,
+    #1c4b9b
+    #0f2f6b
+    #051d4d
+  );
+}
  
 header {
     font-weight: 400;
