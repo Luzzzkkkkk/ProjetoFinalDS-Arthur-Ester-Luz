@@ -22,6 +22,55 @@ body{
     #0f2f6b
     #051d4d
   );
+  overflow: hidden;
+  position: relative;
+}
+
+body::before{
+  content: "";
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  background: rgba (255,255,255,0.08);
+  border-radius: 50%;
+  top: -100px;
+  left: -100px;
+}
+
+body::after{
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border:  20px solid rgba(70,130,255,0,4);
+  border-radius: 50%;
+  bottom: -150px;
+  right: -100px;
+}
+
+.fundo{
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: rgba(255,255,255,0,05);
+  border-radius: 50%;
+  top: 300px;
+  left: -200px;
+}
+
+.linhas{
+  position: absolute;
+  right: 50px;
+  bottom: 100px;
+  width: 120px;
+  height: 120px;
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 10px,
+    rgba(255,255,255,0,15)10px,
+    rgba(255,255,255,0,15)12px
+  );
 }
  
 header {
