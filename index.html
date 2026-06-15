@@ -8,6 +8,7 @@
  
 </head>
 <body>
+   <div class="fundo"></div>
     <header>
         <h1>Gasther Colluz</h1>
           <h2 id="horario">Carregando</h2>
@@ -85,7 +86,9 @@
            <form action="pagina_alunos.html">
            <input type="email" placeholder="Digite seu email" required>
            <input type="text" placeholder="Digite seu nome" required>
-           <input type="password" placeholder="Digite sua senha" required>
+           <input type="password" placeholder="Digite sua senha" 
+           required minlength="8"
+           pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}">
            <button type="submit">Entrar</button>
         </form>
            </div>
