@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+     <head>
+      <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <tittle>Professor</tittle>
+         <link rel="stylesheet" href="sonicface.css">
+    </head>
+    <body>
+        <div class="decoracao circulo c1"></div>
+         <div class="decoracao circulo c2"></div>
+          <div class="decoracao circulo c3"></div>
+           <div class="decoracao circulo c4"></div>
+            <div class="decoracao circulo c5"></div>
+             <div class="decoracao anel a1"></div>
+              <div class="decoracao anel a2"></div>
+               <div class="decoracao anel a3"></div>
+                <div class="decoracao bolinhas b1"></div>
+                 <div class="decoracao bolinhas b2"></div>
+                  <div class="decoracao bolinhas b3"></div>
+                   <div class="decoracao bolinhas b4"></div>
+                    <div class="decoracao bolinhas b5"></div>
+                     <div class="decoracao linhas l1"></div>
+                      <div class="decoracao linhas l2"></div>
+                       <div class="decoracao linhas l3"></div>
+                        <div class="decoracao linhas l4"></div>
+            <header> 
+              <h1>Gasther Colluz</h1>
+               <h2 id="horario">Carregando</h2> 
+               <h2>Professor</h2>
+           
+                <nav>
+
+              </nav>
+            </header>
+           <main>
+             <section>
+              
+             </section>
+           </main>
+           <footer>
+
+           </footer>
+           <script>
+            const hora = new Date().getHours();
+let textohorario = "";
+ 
+if (hora >= 5 && hora < 12) {
+    textohorario = "BOM DIA 😊☀️";  
+} else if (hora >= 12 && hora < 18) {
+    textohorario = "BOA TARDE 😁🌆";
+} else {
+    textohorario = "BOA NOITE 😉🌃";
+} 
+document.getElementById("horario").innerText = textohorario;
+           </script>
+    </body>
+</html>
