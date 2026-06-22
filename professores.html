@@ -25,14 +25,62 @@
             <div class="decoracao linhas l3"></div>
             <div class="decoracao linhas l4"></div>
             <header>
-                
+                 <nav class="abas">
+            <button class="aba active" onclick="navegarPara('inicio', event)">Inicio</button>
+             <button class="aba" onclick="navegarPara('turmas', event)">Turmas</button>
+              <button class="aba" onclick="navegarPara('atividades', event)">Atividades</button>
+               <button class="aba" onclick="navegarPara('calma', event)">mandamentos</button>
+             
             </header>
             <main>
+             <section id="inicio" class="conteudo-pagina active">
+             <h2>A</h2>
 
+             </section>
+             <section id="turmas" class="conteudo-pagina">
+              <h2>Vai tomar no cu</h2>
+             </section>
+             <section id="atividades" class="conteudo-pagina">
+              <h2> foi isso msm que vc viu luz</h2>
+             </section>
+             <section id="calma" class="conteudo-pagina">
+              <h2>Não cobiçarás as férias alheias. As suas vão chegar.</h2>
+              <h2>Chorar sobre os relatórios não vai fazer eles sumirem.</h2>
+              <h2>Seguirás os ensinamentos de Beltrame e não omitirás o 67 no quadro.</h2>
+              <h2>Não julgarás o 67. Aceita que dói menos.</h2>
+             </section>
             </main>
             <footer>
 
             </footer>
+        <script>
+            function navegarPara(idPagina, event) {
+    // 1. Remove o active de todos os botões das abas
+    const abas = document.querySelectorAll('.aba');
+    abas.forEach(aba => aba.classList.remove('active'));
+       
+    // 2. Remove o active de todas as seções de conteúdo
+    const paginas = document.querySelectorAll('.conteudo-pagina');
+    paginas.forEach(pagina => pagina.classList.remove('active'));
+ 
+    // 3. Adiciona active no botão que você clicou
+    event.currentTarget.classList.add('active');
+   
+    // 4. Mostra a página correta
+    document.getElementById(idPagina).classList.add('active');
+}
+        </script>
         
         </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
