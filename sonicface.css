@@ -196,6 +196,7 @@ section {
   flex-direction: colunm;
   gap:2rem;
   padding: 0;
+  width: 100;
 
 }
 
@@ -251,34 +252,35 @@ input[type="text"], input[type="password"]{
 }
 
 
-.card{
-  display: flex;
-  flex-direction: colunm;
-  gap: 2px;
-}
 .card {
-  background-color: #FFFFFF;
-  width: 100%;
-  height: 500px;
-  max-width: 700px;
-  padding: 3rem;
-  border-radius: 10px;
-  outline: none;
-  box-shadow: 0 10px 25px rgb(0,0,0,0.9);
+    display: flex;
+    flex-direction: column; 
+    gap: 20px;
+    max-width: 700px;
+    margin: auto;
+}
 
+button.aba {
+    background-color: #122C4F;
+    color: #FFFFFF;
+    width: 100%;
+    padding: 2rem;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-family: "Montserrat Alternates", sans-serif; ;
+
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
 }
- 
-button {
-  background-color: #122C4F;
-  color: #FFFFFF;
-  border-radius: 10px;
-  font-family: "Montserrat Alternates", sans-serif;
-  font-size: 1.0rem;
-  padding: 0.5rem;
-  outline: none;
-  box-shadow: 0 10px 25px rgb(0,0,0,0.1);
-  
+
+button.aba:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
 }
+
 
 .aba.active {
   background-color: #435a70;
@@ -297,6 +299,15 @@ button {
 }
 .conteudo-pagina.active{
   display: block;
+}
+
+img[src="fotos/luz.png"] {
+  transform: rotate(90deg);
+}
+
+img[src="fotos/Gasther Colluz.png"] {
+  position: relative;
+  top: -330px;
 }
 
 
