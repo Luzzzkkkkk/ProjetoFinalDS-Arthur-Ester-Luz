@@ -27,21 +27,81 @@
             <header>
                  <nav class="abas">
             <button class="aba active" onclick="navegarPara('inicio', event)">Inicio</button>
-             <button class="aba" onclick="navegarPara('turmas', event)">Turmas</button>
+             <button class="aba" onclick="navegarPara('chamadas e notas', event)">Chamadas e notas</button>
               <button class="aba" onclick="navegarPara('atividades', event)">Atividades</button>
-               <button class="aba" onclick="navegarPara('calma', event)">mandamentos</button>
+               <button class="aba" onclick="navegarPara('turmas', event)">turmas</button>
+              <button class="aba" onclick="navegarPara('calma', event)">mandamentos</button>
              
             </header>
             <main>
              <section id="inicio" class="conteudo-pagina active">
-             <h2>A</h2>
+             <h2 id="horario">Carregando</h2>
+                <h2></h2>
 
              </section>
-             <section id="turmas" class="conteudo-pagina">
-              <h2>Vai tomar no cu</h2>
+             <section id="chamadas e notas" class="conteudo-pagina">
+              <h3>Registro de Faltas</h3>
+
+<details>
+    <summary><strong>📐 1º Ano Medio - Fazer Chamada</strong></summary>
+    <ol>
+        <li>Arthur Castillo | <input type="checkbox"> Marcar Falta</li>
+        <li>Marcos Aurelio | <input type="checkbox"> Marcar Falta</li>
+        <input type="button" >
+    </ol>
+</details>
+<h3>📝 Lançamento de Notas (3 Notas por Aluno)</h3>
+
+<details>
+    <summary><strong>📐 1º Ano Medio - Digitar Notas</strong></summary>
+    <ol>
+        <li>
+            Ana Silva <br>
+            Nota 1: <input type="number" min="0" max="10"> | 
+            Nota 2: <input type="number" min="0" max="10"> | 
+            Nota 3: <input type="number" min="0" max="10">
+        </li>
+        <br>
+        <li>
+            Bruno Oliveira <br>
+            Nota 1: <input type="number" min="0" max="10"> | 
+            Nota 2: <input type="number" min="0" max="10"> | 
+            Nota 3: <input type="number" min="0" max="10">
+        </li>
+    </ol>
              </section>
              <section id="atividades" class="conteudo-pagina">
-              <h2> foi isso msm que vc viu luz</h2>
+              <h2>lance suas atividades</h2>
+              <h2>AQUI!!!<h2>
+               <div class="card">
+                <input type="text">
+               </div>
+               
+             </section>
+             <section id="turmas" class="conteudo-pagina">
+              <h2>👥 Visualizar dados</h2>
+
+<details>
+    <summary><strong>📐 1º Ano Medio</strong></summary>
+    <ol>
+        <li>Arthur Castillo</li>
+        <li>Marcos Aurelio</li>
+    </ol>
+</details>
+<details>
+    <summary><strong>📐 2º Ano Medio</strong></summary>
+    <ol>
+        <li>Ana Morvez</li>
+        <li>Ester </li>
+    </ol>
+</details>
+<details>
+    <summary><strong>📐 3º Ano Medio</strong></summary>
+    <ol>
+        <li>Giovanna luz</li>
+        <li>Bruno oliveira</li>
+    </ol>
+</details>
              </section>
              <section id="calma" class="conteudo-pagina">
               <h2>Não cobiçarás as férias alheias. As suas vão chegar.</h2>
@@ -69,6 +129,17 @@
     // 4. Mostra a página correta
     document.getElementById(idPagina).classList.add('active');
 }
+const hora = new Date().getHours();
+let textohorario = "";
+ 
+if (hora >= 5 && hora < 12) {
+    textohorario = "BOM DIA, Professor😊☀️";  
+} else if (hora >= 12 && hora < 18) {
+    textohorario = "BOA TARDE, Professor😁🌆";
+} else {
+    textohorario = "BOA NOITE, Professor 😉🌃";
+}
+document.getElementById("horario").innerText = textohorario;
         </script>
         
         </body>
