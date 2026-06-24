@@ -450,7 +450,6 @@ if __name__ == "__main__":
 #     id INT AUTO_INCREMENT PRIMARY KEY,          
 #     nome VARCHAR(100) NOT NULL,
 #     idade TINYINT UNSIGNED NULL,                 
-#     data_nascimento DATE NULL,                  
 #     materia VARCHAR(50) NOT NULL,                
 #     senha VARCHAR(255) NOT NULL 
 # );
@@ -458,14 +457,6 @@ if __name__ == "__main__":
 
 # ALTER TABLE professores ADD COLUMN senha VARCHAR(255) NOT NULL;
 
-# CREATE TABLE IF NOT EXISTS secretario (
-#    id_secretario INT NOT NULL,
-#    nome VARCHAR(100),
-#    idade TINYINT UNSIGNED NOT NULL,
-#    data_nascimento DATE
-# );
-
 # SELECT * FROM alunos;
 # SELECT * FROM notas_alunos;
 # SELECT * FROM professores;
-# SELECT * FROM secretario;
