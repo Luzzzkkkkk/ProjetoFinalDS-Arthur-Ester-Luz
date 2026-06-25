@@ -1,3 +1,4 @@
+
 import mysql.connector
 from mysql.connector import Error
 import secrets
@@ -460,3 +461,4 @@ if __name__ == "__main__":
 # SELECT * FROM alunos;
 # SELECT * FROM notas_alunos;
 # SELECT * FROM professores;
+
