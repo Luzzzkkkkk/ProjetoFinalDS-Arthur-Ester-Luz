@@ -270,6 +270,16 @@ button.aba:hover {
   box-shadow: 0 15px 30px rgba(0,0,0,0.3);
 }
 
+button[type="submit"]{
+  padding: 12px;
+  width: 100%;
+  border-radius: 10px;
+  font-family:"Montserrat Alternates", sans-serif;
+  font-weight: bold;
+  background-color: #122C4F;
+  color: #FFFFFF;
+}
+
 .aba.active {
   background-color: #122C4F;
   color: #fff;
