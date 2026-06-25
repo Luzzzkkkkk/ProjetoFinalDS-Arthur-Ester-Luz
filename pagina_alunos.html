@@ -5,99 +5,141 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="sonicface.css">
     <title>Boletim Escolar</title>
-  
 </head>
- <body>
-    <div class="decoracao circulo c1"></div>
-  <div class="decoracao circulo c2"></div>
-  <div class="decoracao circulo c3"></div>
-  <div class="decoracao circulo c4"></div>
-  <div class="decoracao circulo c5"></div>
-  <div class="decoracao anel a1"></div>
-  <div class="decoracao anel a2"></div>
-  <div class="decoracao anel a3"></div>
-  <div class="decoracao bolinhas b1"></div>
-  <div class="decoracao bolinhas b2"></div>
-  <div class="decoracao bolinhas b3"></div>
-  <div class="decoracao bolinhas b4"></div>
-  <div class="decoracao bolinhas b5"></div>
-  <div class="decoracao linhas l1"></div>
-  <div class="decoracao linhas l2"></div>
-  <div class="decoracao linhas l3"></div>
-  <div class="decoracao linhas l4"></div>
-<h1 id="horario">Carregando</h1>
-<div class="boletim-container">
-    <h2>Boletim Escolar</h2>
-    
-   
-    <div class="info-aluno">
-        <p><strong>Nome do Aluno:</strong>Arthur Castillo Buroff</p>
-        <p><strong>Turma:</strong> 1º Ano A - Ensino Médio</p>
-        <p><strong>Ano Letivo:</strong> 2026</p>
+<body>
+
+    <!-- TELA 1: TUDO DO SEU BOLETIM FICA AQUI DENTRO -->
+    <div id="tela-boletim">
+        <div class="decoracao circulo c1"></div>
+        <div class="decoracao circulo c2"></div>
+        <div class="decoracao circulo c3"></div>
+        <div class="decoracao circulo c4"></div>
+        <div class="decoracao circulo c5"></div>
+        <div class="decoracao anel a1"></div>
+        <div class="decoracao anel a2"></div>
+        <div class="decoracao anel a3"></div>
+        <div class="decoracao bolinhas b1"></div>
+        <div class="decoracao bolinhas b2"></div>
+        <div class="decoracao bolinhas b3"></div>
+        <div class="decoracao bolinhas b4"></div>
+        <div class="decoracao bolinhas b5"></div>
+        <div class="decoracao linhas l1"></div>
+        <div class="decoracao linhas l2"></div>
+        <div class="decoracao linhas l3"></div>
+        <div class="decoracao linhas l4"></div>
+
+        <h1 id="horario">Carregando</h1>
+
+        <div class="boletim-container">
+            <h2>Boletim Escolar</h2>
+            
+            <div class="info-aluno">
+                <p><strong>Nome do Aluno:</strong>Arthur Castillo Buroff</p>
+                <p><strong>Turma:</strong> 1º Ano A - Ensino Médio</p>
+                <p><strong>Ano Letivo:</strong> 2026</p>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Disciplina</th>
+                        <th>1º Bimestre</th>
+                        <th>2º Bimestre</th>
+                        <th>3º Bimestre</th>
+                        <th>Média Final</th>
+                        <th>Situação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Matemática</td>
+                        <td>A</td>
+                        <td>A</td>
+                        <td>PA</td>
+                        <td>A</td>
+                        <td class="aprovado">Aprovado</td>
+                    </tr>
+                    <tr>
+                        <td>Português</td>
+                        <td>PA</td>
+                        <td>PA</td>
+                        <td>A</td>
+                        <td>PA</td>
+                        <td class="Parcialmente">Parcialmente Aprovado</td>
+                    </tr>
+                    <tr>
+                        <td>História</td>
+                        <td>PA</td>
+                        <td>A</td>
+                        <td>NA</td>
+                        <td>NA</td>
+                        <td class="reprovado">Não Aprovado</td>
+                    </tr>
+                    <tr>
+                        <td>Física</td>
+                        <td>A</td>
+                        <td>A</td>
+                        <td>PA</td>
+                        <td>A</td>
+                        <td class="aprovado">Aprovado</td>
+                    </tr>
+                    <tr>
+                        <td>Quimica</td>
+                        <td>A</td>
+                        <td>NA</td>
+                        <td>PA</td>
+                        <td>PA</td>
+                        <td class="Parcialmente">Parcialmente Aprovado</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div>
+            <h2>atividades a fazer</h2>
+            <p></p>
+        </div>
+
+        <button onclick="abrirAtividade()">Ver Atividade</button>
+
+        <h2>atividades entregues</h2>
     </div>
 
-   
-    <table>
-        <thead>
-            <tr>
-                <th>Disciplina</th>
-                <th>1º Bimestre</th>
-                <th>2º Bimestre</th>
-                <th>3º Bimestre</th>
-                <th>Média Final</th>
-                <th>Situação</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Matemática</td>
-                <td>8.5</td>
-                <td>7.0</td>
-                <td>9.0</td>
-                <td>8.1</td>
-                <td class="aprovado">Aprovado</td>
-            </tr>
-            <tr>
-                <td>Português</td>
-                <td>6.0</td>
-                <td>5.5</td>
-                <td>7.5</td>
-                <td>6.3</td>
-                <td class="aprovado">Aprovado</td>
-            </tr>
-            <tr>
-                <td>História</td>
-                <td>4.5</td>
-                <td>5.0</td>
-                <td>6.0</td>
-                <td>5.1</td>
-                <td class="reprovado">Recuperação</td>
-            </tr>
-            <tr>
-                <td>Física</td>
-                <td>9.0</td>
-                <td>8.5</td>
-                <td>9.5</td>
-                <td>9.0</td>
-                <td class="aprovado">Aprovado</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+    <!-- TELA 2: NOVA "ABA" DA ATIVIDADE (COMEÇA ESCONDIDA) -->
+    <div id="tela-atividade" style="display: none;">
+        <h2>atividades/h2>
+        <h3>Atividade fri</h3>
+        
+        
+        <!-- Botão para voltar ao boletim -->
+        <button onclick="voltarParaOBoletim()">Voltar para o Boletim</button>
+    </div>
 
 </body>
+
 <script>
-     const hora = new Date().getHours();
-let textohorario = "";
- 
-if (hora >= 5 && hora < 12) {
-    textohorario = "BOM DIA, ARTHUR😊☀️";  
-} else if (hora >= 12 && hora < 18) {
-    textohorario = "BOA TARDE, ARTHUR😁🌆";
-} else {
-    textohorario = "BOA NOITE, ARTHUR😉🌃";
-}
-document.getElementById("horario").innerText = textohorario;
- 
+    // Lógica do Horário
+    const hora = new Date().getHours();
+    let textohorario = "";
+     
+    if (hora >= 5 && hora < 12) {
+        textohorario = "BOM DIA, ARTHUR😊☀️";  
+    } else if (hora >= 12 && hora < 18) {
+        textohorario = "BOA TARDE, ARTHUR😁🌆";
+    } else {
+        textohorario = "BOA NOITE, ARTHUR😉🌃";
+    }
+    document.getElementById("horario").innerText = textohorario;
+
+    // NOVAS FUNÇÕES PARA ALTERNAR AS TELAS
+    function abrirAtividade() {
+        document.getElementById("tela-boletim").style.display = "none";  // Some com o boletim e decorações
+        document.getElementById("tela-atividade").style.display = "block"; // Mostra a atividade
+    }
+
+    function voltarParaOBoletim() {
+        document.getElementById("tela-atividade").style.display = "none";  // Some com a atividade
+        document.getElementById("tela-boletim").style.display = "block"; // Devolve o boletim e decorações
+    }
 </script>
 </html>
