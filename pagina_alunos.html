@@ -6,40 +6,48 @@
     <link rel="stylesheet" href="sonicface.css">
     <title>Boletim Escolar</title>
 </head>
+
 <body>
 
-    <!-- TELA 1: TUDO DO SEU BOLETIM FICA AQUI DENTRO -->
+    <!-- ================= BOLETIM ================= -->
+
     <div id="tela-boletim">
+
         <div class="decoracao circulo c1"></div>
         <div class="decoracao circulo c2"></div>
         <div class="decoracao circulo c3"></div>
         <div class="decoracao circulo c4"></div>
         <div class="decoracao circulo c5"></div>
+
         <div class="decoracao anel a1"></div>
         <div class="decoracao anel a2"></div>
         <div class="decoracao anel a3"></div>
+
         <div class="decoracao bolinhas b1"></div>
         <div class="decoracao bolinhas b2"></div>
         <div class="decoracao bolinhas b3"></div>
         <div class="decoracao bolinhas b4"></div>
         <div class="decoracao bolinhas b5"></div>
+
         <div class="decoracao linhas l1"></div>
         <div class="decoracao linhas l2"></div>
         <div class="decoracao linhas l3"></div>
         <div class="decoracao linhas l4"></div>
 
-        <h1 id="horario">Carregando</h1>
+        <h1 id="horario">Carregando...</h1>
 
         <div class="boletim-container">
+
             <h2>Boletim Escolar</h2>
-            
+
             <div class="info-aluno">
-                <p><strong>Nome do Aluno:</strong>Arthur Castillo Buroff</p>
+                <p><strong>Nome do Aluno:</strong> Arthur Castillo Buroff</p>
                 <p><strong>Turma:</strong> 1º Ano A - Ensino Médio</p>
                 <p><strong>Ano Letivo:</strong> 2026</p>
             </div>
 
             <table>
+
                 <thead>
                     <tr>
                         <th>Disciplina</th>
@@ -50,7 +58,9 @@
                         <th>Situação</th>
                     </tr>
                 </thead>
+
                 <tbody>
+
                     <tr>
                         <td>Matemática</td>
                         <td>A</td>
@@ -59,6 +69,7 @@
                         <td>A</td>
                         <td class="aprovado">Aprovado</td>
                     </tr>
+
                     <tr>
                         <td>Português</td>
                         <td>PA</td>
@@ -67,6 +78,7 @@
                         <td>PA</td>
                         <td class="Parcialmente">Parcialmente Aprovado</td>
                     </tr>
+
                     <tr>
                         <td>História</td>
                         <td>PA</td>
@@ -75,6 +87,7 @@
                         <td>NA</td>
                         <td class="reprovado">Não Aprovado</td>
                     </tr>
+
                     <tr>
                         <td>Física</td>
                         <td>A</td>
@@ -83,63 +96,148 @@
                         <td>A</td>
                         <td class="aprovado">Aprovado</td>
                     </tr>
+
                     <tr>
-                        <td>Quimica</td>
+                        <td>Química</td>
                         <td>A</td>
                         <td>NA</td>
                         <td>PA</td>
                         <td>PA</td>
                         <td class="Parcialmente">Parcialmente Aprovado</td>
                     </tr>
+
                 </tbody>
+
             </table>
+
         </div>
 
-        <div>
-            <h2>atividades a fazer</h2>
-            <p></p>
-        </div>
+        <button onclick="abrirAtividade()">
+            Ver Atividades
+        </button>
 
-        <button onclick="abrirAtividade()">Ver Atividade</button>
-
-        <h2>atividades entregues</h2>
     </div>
 
-    <!-- TELA 2: NOVA "ABA" DA ATIVIDADE (COMEÇA ESCONDIDA) -->
-    <div id="tela-atividade" style="display: none;">
-        <h2>atividades/h2>
-        <h3>Atividade fri</h3>
-        
-        
-        <!-- Botão para voltar ao boletim -->
-        <button onclick="voltarParaOBoletim()">Voltar para o Boletim</button>
+    <!-- ================= TELA DE ATIVIDADES ================= -->
+
+    <div id="tela-atividade" style="display:none;">
+
+        <h2>Atividades</h2>
+
+        <h3>Atividades Entregues</h3>
+
+        <p>Geografia - Apresentação</p>
+
+        <button onclick="VerAtividade()">
+            Visualizar
+        </button>
+
+        <br><br>
+
+        <button onclick="voltarParaOBoletim()">
+            Voltar
+        </button>
+
     </div>
+
+    <!-- ================= VISUALIZAR ATIVIDADE ================= -->
+
+    <div id="tela-veratividade" style="display:none;">
+
+        <h2>Geografia</h2>
+
+        <p>
+            aura
+        </p>
+
+        <button onclick="voltarParaAtividades()">
+            Voltar
+        </button>
+
+    </div>
+    <div id="tela-veratividade1" style="display:none;">
+         
+        <h2>matematica</h2>
+        <p>
+            1+1
+        </p>
+        <button onclick="voltarParaAtividades1()">
+            Voltar
+        </button>
+
+    </div>
+
+    <script>
+
+        // Saudação
+
+        const hora = new Date().getHours();
+        let textoHorario = "";
+
+        if (hora >= 5 && hora < 12) {
+            textoHorario = "BOM DIA, ARTHUR 😊☀️";
+        } else if (hora >= 12 && hora < 18) {
+            textoHorario = "BOA TARDE, ARTHUR 😁🌆";
+        } else {
+            textoHorario = "BOA NOITE, ARTHUR 😉🌃";
+        }
+
+        document.getElementById("horario").innerText = textoHorario;
+
+        // Abrir tela de atividades
+
+        function abrirAtividade() {
+
+            document.getElementById("tela-boletim").style.display = "none";
+            document.getElementById("tela-atividade").style.display = "block";
+
+        }
+
+        // Voltar ao boletim
+
+        function voltarParaOBoletim() {
+
+            document.getElementById("tela-atividade").style.display = "none";
+            document.getElementById("tela-boletim").style.display = "block";
+
+        }
+
+        // Abrir atividade
+
+        function VerAtividade() {
+
+            document.getElementById("tela-atividade").style.display = "none";
+            document.getElementById("tela-veratividade").style.display = "block";
+
+        }
+
+        // Voltar para lista de atividades
+
+        function voltarParaAtividades() {
+
+            document.getElementById("tela-veratividade").style.display = "none";
+            document.getElementById("tela-atividade").style.display = "block";
+
+        }
+          // Abrir atividade
+
+        function VerAtividade1() {
+
+            document.getElementById("tela-atividade").style.display = "none";
+            document.getElementById("tela-veratividade1").style.display = "block";
+
+        }
+
+        // Voltar para lista de atividades
+
+        function voltarParaAtividades() {
+
+            document.getElementById("tela-veratividade1").style.display = "none";
+            document.getElementById("tela-atividade").style.display = "block";
+        }
+
+
+    </script>
 
 </body>
-
-<script>
-    // Lógica do Horário
-    const hora = new Date().getHours();
-    let textohorario = "";
-     
-    if (hora >= 5 && hora < 12) {
-        textohorario = "BOM DIA, ARTHUR😊☀️";  
-    } else if (hora >= 12 && hora < 18) {
-        textohorario = "BOA TARDE, ARTHUR😁🌆";
-    } else {
-        textohorario = "BOA NOITE, ARTHUR😉🌃";
-    }
-    document.getElementById("horario").innerText = textohorario;
-
-    // NOVAS FUNÇÕES PARA ALTERNAR AS TELAS
-    function abrirAtividade() {
-        document.getElementById("tela-boletim").style.display = "none";  // Some com o boletim e decorações
-        document.getElementById("tela-atividade").style.display = "block"; // Mostra a atividade
-    }
-
-    function voltarParaOBoletim() {
-        document.getElementById("tela-atividade").style.display = "none";  // Some com a atividade
-        document.getElementById("tela-boletim").style.display = "block"; // Devolve o boletim e decorações
-    }
-</script>
-</html>
+ </html>
