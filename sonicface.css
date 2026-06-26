@@ -251,6 +251,22 @@ input[type="email"] {
   gap: 20px;
 }
 
+.card-conteudo-pagina {
+  background: white;
+  width: 100%;
+  max-width: 1000px;
+  min-height: 650px;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.35);
+  overflow-y: auto;
+}
+.conteudo-pagina{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 button.aba {
   background-color: #122C4F;
   color: #fff;
@@ -303,6 +319,11 @@ img[src="fotos/Gasther Colluz.png"] {
   top: -330px;
 }
 
+form [action="professores.html"]{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 
 
