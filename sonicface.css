@@ -319,11 +319,157 @@ img[src="fotos/Gasther Colluz.png"] {
   top: -330px;
 }
 
-form [action="professores.html"]{
+form{
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+.card-inicio{
+ display: flex;
+ justify-content: space-between;
+ align-items: flex-start;
+ gap: 40px;
+ padding: 40px;
+}
+
+.texto-inicio{
+ flex: 2;
+}
+
+.texto-inicio h2{
+ font-size: 34px;
+ color: #18304d;
+ margin-bottom: 20px;
+}
+
+
+
+.texto-inicio h3{
+ color: #295d93;
+ margin-top: 30px;
+}
+
+
+
+.texto-inicio p{
+ font-size: 17px;
+ line-height: 1.8;
+ text-align: justify;
+ color: #333;
+}
+
+
+
+.imagens-inicio{
+ flex: 1;
+ display: flex;
+ flex-direction: column;
+ gap: 20px;
+ align-items: center;
+}
+
+
+
+.imagens-inicio img{
+ width: 240px;
+ height: 160px;
+ object-fit: cover;
+ border-radius: 15px;
+ box-shadow: 0 10px 25px rgba(0,0,0,.25);
+ transition: .3s;
+}
+
+
+
+.imagens-inicio img:hover{
+ transform: scale(1.05);
+}
+
+
+
+.info-escola{
+ margin-top: 30px;
+ padding: 20px;
+ background: #f5f8fc;
+ border-left: 6px solid #295d93;
+ border-radius: 12px;
+ box-shadow: 0 5px 15px rgba(0,0,0,.1);
+}
+
+.info-escola h3{
+  margin-bottom: 10px;
+}
+
+
+.info-escola p{
+  margin: 8px 0;
+}
+
+.matriculas{
+
+ background: #295d93;
+ color: white;
+ padding: 15px;
+ border-radius: 12px;
+ text-align: center;
+ font-size: 22px;
+ font-weight: bold;
+ margin: 25px 0;
+ box-shadow: 0 10px 20px rgba(0,0,0,.2);
+ animation: pulse 2s infinite;
+}
+
+@keyframes pulse{
+
+
+0%{
+
+ transform: scale(1);
+
+}
+
+50%{
+  transform: scale(1.03);
+}
+
+ 100%{
+ transform: scale(1);
+}
+
+}
+
+.card-inicio{
+ transition: .4s;
+}
+
+
+
+.card-inicio:hover{
+ transform: translateY(-5px);
+ box-shadow: 0 20px 40px rgba(0,0,0,.35);
+}
+
+
+@media(max-width:900px){
+
+.card-inicio{
+
+flex-direction: column;
+
+}
+
+.imagens-inicio{
+  width: 100%;
+  flex-direction: row;
+  flex-wrap:wrap;
+  justify-content: center;
+}
+
+.imagens-inicio img{
+  width: 180px;
+  height: 130px;
+}
+}
 
 
