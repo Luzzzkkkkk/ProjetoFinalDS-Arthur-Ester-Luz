@@ -1,0 +1,170 @@
+<<<<<<< HEAD
+=======
+<!DOCTYPE html>
+<html lang="pt-br">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secretaria - Gasther Colluz</title>
+    <link rel="stylesheet" href="sonicface.css">
+</head>
+ 
+<body>
+ 
+    <div class="decoracao circulo c1"></div>
+    <div class="decoracao circulo c2"></div>
+    <div class="decoracao circulo c3"></div>
+    <div class="decoracao circulo c4"></div>
+    <div class="decoracao circulo c5"></div>
+    <div class="decoracao anel a1"></div>
+    <div class="decoracao anel a2"></div>
+    <div class="decoracao anel a3"></div>
+    <div class="decoracao bolinhas b1"></div>
+    <div class="decoracao bolinhas b2"></div>
+    <div class="decoracao bolinhas b3"></div>
+    <div class="decoracao bolinhas b4"></div>
+    <div class="decoracao bolinhas b5"></div>
+    <div class="decoracao linhas l1"></div>
+    <div class="decoracao linhas l2"></div>
+    <div class="decoracao linhas l3"></div>
+    <div class="decoracao linhas l4"></div>
+ 
+    <header>
+        <h1>Painel da Secretaria</h1>
+ 
+        <nav class="abas">
+            <button class="aba active" onclick="mostrar('inicio', event)">Início</button>
+            <button class="aba" onclick="mostrar('alunos', event)">Alunos</button>
+            <button class="aba" onclick="mostrar('professores', event)">Professores</button>
+        </nav>
+    </header>
+ 
+    <main>
+ 
+        <section id="inicio" class="conteudo-pagina active">
+            <div class="card-inicio">
+ 
+                <h2>Início</h2>
+ 
+                <!-- Você pode editar esta parte depois -->
+ 
+            </div>
+        </section>
+ 
+        <section id="alunos" class="conteudo-pagina">
+            <div class="card-login">
+ 
+                <h2>Cadastrar Aluno</h2>
+ 
+                <input type="text" id="matricula" placeholder="Matrícula">
+ 
+                <input type="text" id="nomeAluno" placeholder="Nome">
+ 
+                <input type="email" id="emailAluno" placeholder="E-mail">
+ 
+                <input type="password" id="senhaAluno" placeholder="Senha">
+ 
+                <button type="button" onclick="cadastrarAluno()">Cadastrar</button>
+ 
+                <br><br>
+ 
+                <ul id="listaAlunos"></ul>
+ 
+            </div>
+        </section>
+ 
+        <section id="professores" class="conteudo-pagina">
+            <div class="card-login">
+ 
+                <h2>Cadastrar Professor</h2>
+ 
+                <input type="text" id="idProfessor" placeholder="ID">
+ 
+                <input type="text" id="nomeProfessor" placeholder="Nome">
+ 
+                <input type="email" id="emailProfessor" placeholder="E-mail">
+ 
+                <input type="password" id="senhaProfessor" placeholder="Senha">
+ 
+                <button type="button" onclick="cadastrarProfessor()">Cadastrar</button>
+ 
+                <br><br>
+ 
+                <ul id="listaProfessores"></ul>
+ 
+            </div>
+        </section>
+ 
+    </main>
+ 
+    <script>
+ 
+        function mostrar(idPagina, event) {
+ 
+            document.querySelectorAll(".conteudo-pagina").forEach(pagina => {
+                pagina.classList.remove("active");
+            });
+ 
+            document.querySelectorAll(".aba").forEach(botao => {
+                botao.classList.remove("active");
+            });
+ 
+            document.getElementById(idPagina).classList.add("active");
+ 
+            event.currentTarget.classList.add("active");
+        }
+ 
+        function cadastrarAluno() {
+ 
+            let matricula = document.getElementById("matricula").value;
+            let nome = document.getElementById("nomeAluno").value;
+            let email = document.getElementById("emailAluno").value;
+            let senha = document.getElementById("senhaAluno").value;
+ 
+            if (matricula == "" || nome == "" || email == "" || senha == "") {
+                alert("Preencha todos os campos!");
+                return;
+            }
+ 
+            let li = document.createElement("li");
+            li.innerHTML = "<b>" + nome + "</b> | Matrícula: " + matricula + " | " + email;
+ 
+            document.getElementById("listaAlunos").appendChild(li);
+ 
+            document.getElementById("matricula").value = "";
+            document.getElementById("nomeAluno").value = "";
+            document.getElementById("emailAluno").value = "";
+            document.getElementById("senhaAluno").value = "";
+        }
+ 
+        function cadastrarProfessor() {
+ 
+            let id = document.getElementById("idProfessor").value;
+            let nome = document.getElementById("nomeProfessor").value;
+            let email = document.getElementById("emailProfessor").value;
+            let senha = document.getElementById("senhaProfessor").value;
+ 
+            if (id == "" || nome == "" || email == "" || senha == "") {
+                alert("Preencha todos os campos!");
+                return;
+            }
+ 
+            let li = document.createElement("li");
+            li.innerHTML = "<b>" + nome + "</b> | ID: " + id + " | " + email;
+ 
+            document.getElementById("listaProfessores").appendChild(li);
+ 
+            document.getElementById("idProfessor").value = "";
+            document.getElementById("nomeProfessor").value = "";
+            document.getElementById("emailProfessor").value = "";
+            document.getElementById("senhaProfessor").value = "";
+        }
+ 
+    </script>
+ 
+</body>
+ 
+</html>
+ 
+>>>>>>> 5c914dbf5329016e06ef33b7317e0c679e16cb6e
