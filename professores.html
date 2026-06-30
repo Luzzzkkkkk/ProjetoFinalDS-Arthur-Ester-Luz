@@ -38,8 +38,11 @@
              <section id="inicio" class="conteudo-pagina active">
             <div class="card">
              <h2 id="horario">Carregando</h2>
-                <h2></h2>
-
+                <h2> Bem-vindo(a), Professor(a)!</h2>
+                    <p> Este é o seu ambiente exclusivo de gerenciamento acadêmico do Colégio Gasther Colluz.</p><br>
+                        <p> Aqui você pode acompanhar suas turmas de forma prática e organizada, lançando notas, registrando frequência, publicando atividades e mantendo o desempenho dos alunos sempre atualizado.</p> <br>
+                        <p>Nosso objetivo é oferecer uma plataforma simples, segura e eficiente para facilitar o seu trabalho e contribuir para uma educação de qualidade.</p> <br>
+                        <p>Desejamos um excelente período letivo. Conte com o sistema para tornar sua rotina mais ágil e organizada!<p><br>
              </section>
              <section id="chamadas e notas" class="conteudo-pagina">
               <h3>Registro de Faltas</h3>
@@ -73,7 +76,7 @@
     </ol>
              </section>
 <section id="atividades" class="conteudo-pagina">
-    <h2>lance suas atividades</h2>
+    <h2>Lance suas atividades</h2>
     <h2>AQUI!!!</h2> 
 
     <div class="card">
@@ -147,11 +150,11 @@ const hora = new Date().getHours();
 let textohorario = "";
  
 if (hora >= 5 && hora < 12) {
-    textohorario = "BOM DIA, Professor😊☀️";  
+    textohorario = "BOM DIA 😊☀️";  
 } else if (hora >= 12 && hora < 18) {
-    textohorario = "BOA TARDE, Professor😁🌆";
+    textohorario = "BOA TARDE 😁🌆";
 } else {
-    textohorario = "BOA NOITE, Professor 😉🌃";
+    textohorario = "BOA NOITE 😉🌃";
 }
 document.getElementById("horario").innerText = textohorario;
         </script>

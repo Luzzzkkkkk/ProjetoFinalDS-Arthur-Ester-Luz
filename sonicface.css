@@ -587,4 +587,433 @@ img[alt="Construçao"]{
  
 }
  
+ 
+#inicio,
+#chamadas\ e\ notas,
+#atividades,
+#turmas,
+#calma{
+ 
+    width:100%;
+    max-width:1100px;
+ 
+}
+ 
+.card{
+ 
+    background:#f8fbff;
+    padding:30px;
+    border-radius:20px;
+    margin-top:20px;
+    box-shadow:0 10px 25px rgba(0,0,0,.12);
+ 
+}
+ 
+ 
+h2{
+ 
+    color:#18304d;
+    margin-bottom:15px;
+ 
+}
+ 
+h3{
+ 
+    color:#04182e;
+    margin:25px 0 15px;
+ 
+}
 
+ 
+details{
+ 
+    background:white;
+    border-radius:15px;
+    margin:20px 0;
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+    overflow:hidden;
+ 
+}
+ 
+summary{
+ 
+    background:#0d2846;
+    color:white;
+    padding:18px;
+    cursor:pointer;
+    font-size:18px;
+    font-weight:bold;
+ 
+}
+ 
+details[open] summary{
+  background:#18304d;
+}
+ 
+details ol{
+  padding:25px;
+}
+ 
+details li{
+  margin:15px 0;
+}
+ 
+ 
+input[type="number"],
+input[type="text"],
+input[type="date"]{
+ 
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    margin-bottom:15px;
+    border-radius:10px;
+    border:2px solid #295d93;
+    font-family:"Montserrat Alternates", sans-serif;
+    transition:.3s;
+ 
+}
+ 
+input:focus{
+ 
+    outline:none;
+    border-color:#4b9cff;
+    box-shadow:0 0 10px rgba(75,156,255,.4);
+ 
+}
+ 
+ 
+input[type="checkbox"]{
+ 
+    transform:scale(1.4);
+    margin-left:10px;
+    cursor:pointer;
+ 
+}
+ 
+button{
+ 
+    padding:14px;
+    background:#18304d;
+    color:white;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    font-size:17px;
+    font-family:"Montserrat Alternates", sans-serif;
+    transition:.3s;
+ 
+}
+ 
+button:hover{
+ 
+    background:#295d93;
+    transform:translateY(-3px);
+ 
+}
+ 
+ol{
+  line-height:2;
+}
+ 
+li{
+  margin-bottom:10px;
+}
+ 
+#calma h2{
+ 
+    background:white;
+    padding:20px;
+    border-left:8px solid #295d93;
+    border-radius:15px;
+    margin:20px 0;
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+    transition:.3s;
+ 
+}
+ 
+#calma h2:hover{
+  transform:translateX(10px);
+}
+ 
+
+@keyframes aparecer{
+from{
+opacity: 0;
+transform:translateY(20px);
+}
+ 
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.card-professor,
+.card,
+details{
+ 
+    animation:aparecer .7s ease;
+ 
+}
+ 
+@media(max-width:900px){
+ 
+.card-professor{
+padding:25px;
+}
+
+summary{
+font-size:16px;
+}
+
+button{
+width:100%;
+}
+
+}
+ 
+#tela-boletim,
+#tela-atividade,
+#tela-veratividade,
+#tela-veratividade1{
+ 
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+    padding:40px;
+ 
+}
+ 
+#horario{
+ 
+    color:white;
+    margin-bottom:25px;
+    text-align:center;
+ 
+}
+ 
+/* Card principal */
+ 
+.boletim-container{
+ 
+    width:100%;
+    max-width:1100px;
+    background:white;
+    padding:40px;
+    border-radius:25px;
+    box-shadow:0 20px 40px rgba(0,0,0,.35);
+ 
+}
+ 
+/* Títulos */
+ 
+.boletim-container h2,
+#tela-atividade h2,
+#tela-veratividade h2,
+#tela-veratividade1 h2{
+ 
+    color:#18304d;
+    text-align:center;
+    margin-bottom:25px;
+ 
+}
+ 
+/* Informações do aluno */
+ 
+.info-aluno{
+ 
+    background:#f5f8fc;
+    border-left:6px solid #295d93;
+    padding:20px;
+    border-radius:15px;
+    margin-bottom:30px;
+ 
+}
+ 
+.info-aluno p{
+ 
+    margin:10px 0;
+    font-size:17px;
+ 
+}
+ 
+table{
+ 
+    width:100%;
+    border-collapse:collapse;
+    margin-top:25px;
+ 
+}
+ 
+thead{
+ 
+    background:#18304d;
+    color:white;
+ 
+}
+ 
+th{
+ 
+    padding:15px;
+    font-size:17px;
+ 
+}
+ 
+td{
+ 
+    padding:15px;
+    text-align:center;
+    border-bottom:1px solid #ddd;
+ 
+}
+ 
+tbody tr:nth-child(even){
+ 
+    background:#f7f9fc;
+ 
+}
+ 
+tbody tr:hover{
+ 
+    background:#dfefff;
+ 
+}
+ 
+/* Situações */
+ 
+.aprovado{
+ 
+    color:green;
+    font-weight:bold;
+ 
+}
+ 
+.Parcialmente{
+ 
+    color:#d68c00;
+    font-weight:bold;
+ 
+}
+ 
+.reprovado{
+ 
+    color:red;
+    font-weight:bold;
+ 
+}
+ 
+button{
+ 
+    margin-top:25px;
+    padding:15px 35px;
+    border:none;
+    border-radius:12px;
+    background:#18304d;
+    color:white;
+    font-size:17px;
+    font-family:"Montserrat Alternates", sans-serif;
+    cursor:pointer;
+    transition:.3s;
+ 
+}
+ 
+button:hover{
+ 
+    background:#295d93;
+    transform:translateY(-4px);
+ 
+}
+ 
+#tela-atividade{
+ 
+    background:white;
+    max-width:900px;
+    margin:auto;
+    border-radius:25px;
+    box-shadow:0 20px 40px rgba(0,0,0,.35);
+    padding:40px;
+ 
+}
+ 
+#tela-atividade h3{
+    color:#295d93;
+    margin-top:30px;
+}
+ 
+#tela-atividade p{
+ 
+    background:#f5f8fc;
+    padding:18px;
+    border-left:6px solid #295d93;
+    border-radius:12px;
+    margin:15px 0;
+ 
+}
+ 
+#tela-veratividade,
+#tela-veratividade1{
+ 
+    background:white;
+    max-width:900px;
+    margin:auto;
+    border-radius:25px;
+    box-shadow:0 20px 40px rgba(0,0,0,.35);
+    padding:40px;
+ 
+}
+ 
+#tela-veratividade p,
+#tela-veratividade1 p{
+ 
+    margin-top:20px;
+    background:#f5f8fc;
+    padding:25px;
+    border-radius:15px;
+    line-height:1.8;
+ 
+}
+
+ 
+@keyframes aparecer{
+ 
+from{
+opacity:0;
+transform:translateY(20px);
+}
+ 
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+ 
+.boletim-container,
+#tela-atividade,
+#tela-veratividade,
+#tela-veratividade1{
+animation:aparecer .8s ease;
+}
+ 
+@media(max-width:900px){
+ 
+.boletim-container{
+padding:20px;
+}
+ 
+table{
+font-size:14px;
+display:block;
+overflow-x:auto;
+}
+ 
+th,
+td{
+padding:10px;
+}
+ 
+button{
+width:100%;
+}
+}
