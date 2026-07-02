@@ -190,7 +190,7 @@ def editar_aluno(conexao):
     
     cursor = conexao.cursor()
     cursor.execute("SELECT * FROM alunos WHERE matricula = %s", (matricula,))
-    if not cursor.fetchone():
+    if not cursor.fetchone(): #mais usado pra validação ta ok#
         print("Aluno não encontrado.")
         return
         
@@ -220,7 +220,8 @@ def buscar_aluno_por_nome(conexao):
     
     cursor = conexao.cursor()
     cursor.execute("SELECT matricula, nome, turma FROM alunos WHERE nome LIKE %s", (f"%{nome_busca}%",))
-    resultados = cursor.fetchall()
+    resultados = cursor.fetchall() #fetchall é mais usado para listagens dos itens da tabela, isso envolve o mysql hein aura#
+
     
     if not resultados:
         print("Nenhum aluno encontrado.")
@@ -357,7 +358,7 @@ def cadastrar_professor(conexao):
     cursor.execute(comando, (nome, materia, senha_provisoria))
     conexao.commit()
     
-    id_prof = cursor.lastrowid
+    id_prof = cursor.lastrowid #usado para recuperar o valor da chave primária#
     print(f"Professor cadastrado com sucesso! ID gerado: {id_prof}")
     print(f"SENHA GERADA: {senha_provisoria} (Anote e passe para o professor)")
 
