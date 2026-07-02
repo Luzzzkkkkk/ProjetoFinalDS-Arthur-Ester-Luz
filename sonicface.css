@@ -181,6 +181,7 @@ main {
   gap: 1.5rem;
   justify-content: center;
   align-items: center;
+  min-height:100vh;
 }
 
 section {
@@ -794,7 +795,6 @@ width:100%;
  
 }
  
-/* Card principal */
  
 .boletim-container{
  
@@ -807,7 +807,6 @@ width:100%;
  
 }
  
-/* Títulos */
  
 .boletim-container h2,
 #tela-atividade h2,
@@ -881,7 +880,6 @@ tbody tr:hover{
  
 }
  
-/* Situações */
  
 .aprovado{
  
